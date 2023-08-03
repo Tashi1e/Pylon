@@ -1,7 +1,89 @@
-<!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+	version="4.0">
 
-<web-app>
-  <display-name>Archetype Created Web Application</display-name>
+	<display-name>NewsPortal</display-name>
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+
+	<servlet>
+		<servlet-name>dispatcher</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/servlet.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>dispatcher</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+
+	<servlet>
+		<servlet-name>Controller</servlet-name>
+		<servlet-class>tcejorptset.spring.controller.FrontController</servlet-class>
+		<multipart-config>
+			<location></location>
+			<max-file-size>20848820</max-file-size>
+			<max-request-size>418018841</max-request-size>
+			<file-size-threshold>1048576</file-size-threshold>
+		</multipart-config>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Controller</servlet-name>
+		<url-pattern>/controller</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>Controller</servlet-name>
+		<url-pattern>/error</url-pattern>
+	</servlet-mapping>
+
+
+	<filter>
+		<filter-name>ChangeLocaleFilter</filter-name>
+		<filter-class>tcejorptset.spring.controller.filters.ChangeLocaleFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>ChangeLocaleFilter</filter-name>
+		<url-pattern>/controller</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>RemoveErrorFilter</filter-name>
+		<filter-class>tcejorptset.spring.controller.filters.RemoveErrorFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>RemoveErrorFilter</filter-name>
+		<url-pattern>/controller</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>EncodingFilter</filter-name>
+		<filter-class>tcejorptset.spring.controller.filters.EncodingFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>EncodingFilter</filter-name>
+		<url-pattern>/controller</url-pattern>
+	</filter-mapping>
+
+	<listener>
+		<listener-class>tcejorptset.spring.controller.listeners.ConnectionPoolOpsListener</listener-class>
+	</listener>
+
+	<listener>
+		<listener-class>tcejorptset.spring.controller.listeners.LoginByTokenListener</listener-class>
+	</listener>
+
 </web-app>
