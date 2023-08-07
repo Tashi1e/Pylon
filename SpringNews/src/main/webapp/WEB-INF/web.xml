@@ -28,7 +28,7 @@
 
 	<servlet>
 		<servlet-name>Controller</servlet-name>
-		<servlet-class>tcejorptset.spring.controller.FrontController</servlet-class>
+		<servlet-class>jd2.tcejorptset.spring.controller.FrontController</servlet-class>
 		<multipart-config>
 			<location></location>
 			<max-file-size>20848820</max-file-size>
@@ -50,7 +50,7 @@
 
 	<filter>
 		<filter-name>ChangeLocaleFilter</filter-name>
-		<filter-class>tcejorptset.spring.controller.filters.ChangeLocaleFilter</filter-class>
+		<filter-class>jd2.tcejorptset.spring.controller.filters.ChangeLocaleFilter</filter-class>
 	</filter>
 
 	<filter-mapping>
@@ -60,7 +60,7 @@
 
 	<filter>
 		<filter-name>RemoveErrorFilter</filter-name>
-		<filter-class>tcejorptset.spring.controller.filters.RemoveErrorFilter</filter-class>
+		<filter-class>jd2.tcejorptset.spring.controller.filters.RemoveErrorFilter</filter-class>
 	</filter>
 
 	<filter-mapping>
@@ -70,7 +70,7 @@
 
 	<filter>
 		<filter-name>EncodingFilter</filter-name>
-		<filter-class>tcejorptset.spring.controller.filters.EncodingFilter</filter-class>
+		<filter-class>jd2.tcejorptset.spring.controller.filters.EncodingFilter</filter-class>
 	</filter>
 
 	<filter-mapping>
@@ -79,11 +79,11 @@
 	</filter-mapping>
 
 	<listener>
-		<listener-class>tcejorptset.spring.controller.listeners.ConnectionPoolOpsListener</listener-class>
+		<listener-class>jd2.tcejorptset.spring.controller.listeners.ConnectionPoolOpsListener</listener-class>
 	</listener>
 
 	<listener>
-		<listener-class>tcejorptset.spring.controller.listeners.LoginByTokenListener</listener-class>
+		<listener-class>jd2.tcejorptset.spring.controller.listeners.LoginByTokenListener</listener-class>
 	</listener>
 
 </web-app>
