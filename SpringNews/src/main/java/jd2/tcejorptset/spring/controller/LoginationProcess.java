@@ -47,7 +47,6 @@ public class LoginationProcess {
 						attributesContainer.put("presentation", "newsList");
 					}
 					model.addAllAttributes(attributesContainer);
-					
 //					System.out.println(); //TEST
 					
 				} catch (ServiceException e) {
@@ -62,8 +61,5 @@ public class LoginationProcess {
 		attributesContainer.clear();
 		model.addAllAttributes(attributesContainer);
 		return "layouts/baseLayout";
-	}
-
-	
-	
+	}	
 }
