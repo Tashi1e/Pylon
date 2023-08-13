@@ -39,6 +39,7 @@ public final class ConnectionPool {
 
 		DBResourceManager dbResourseManager = DBResourceManager.getInstance();
 		this.driverName = dbResourseManager.getValue(DBParameter.DB_DRIVER);
+		System.out.println(driverName); //TEST
 		this.url = dbResourseManager.getValue(DBParameter.DB_URL);
 		this.user = dbResourseManager.getValue(DBParameter.DB_USER);
 		;

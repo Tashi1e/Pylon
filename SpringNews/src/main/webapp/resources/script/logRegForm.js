@@ -5,6 +5,7 @@ let btn3 = document.getElementById('signin');
 let btn4 = document.getElementById('remember');
 let lable = document.querySelectorAll(".logFormLabels");
 let check = document.getElementById('checkbox');
+let box = document.getElementById('box');
 
 btn1.onclick = function() {
 	for (let txt of text) {

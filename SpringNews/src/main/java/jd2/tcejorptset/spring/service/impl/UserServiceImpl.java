@@ -4,7 +4,7 @@ import java.util.Map;
 
 import jd2.tcejorptset.spring.bean.User;
 import jd2.tcejorptset.spring.bean.UserInfo;
-import jd2.tcejorptset.spring.bean.UserRoles;
+import jd2.tcejorptset.spring.bean.UserRole;
 import jd2.tcejorptset.spring.dao.DaoException;
 import jd2.tcejorptset.spring.dao.DaoProvider;
 import jd2.tcejorptset.spring.dao.IUserDAO;
@@ -118,11 +118,11 @@ public class UserServiceImpl implements IUserService {
 		String role;
 		try {
 		if (userId == null) {
-			return UserRoles.GUEST.getRole();
+			return UserRole.GUEST.getRole();
 		}
 		role = userDAO.getRole(userId);
 		if (role == null) {
-			return UserRoles.GUEST.getRole();
+			return UserRole.GUEST.getRole();
 		}
 		return role;
 		} catch (DaoException e) {
