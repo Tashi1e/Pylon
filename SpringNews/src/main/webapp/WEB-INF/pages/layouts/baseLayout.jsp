@@ -19,15 +19,15 @@
 <fmt:message bundle="${loc}" key="local.headline.title" />
 </title>
 
-<link rel="stylesheet" type="text/css" href="./styles/newsStyle29.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/styles/newsStyle30.css">
 
 </head>
-<body style="background-image: url(images/newspaper_background.jpg)">
+<body style="background-image: url(${pageContext.request.contextPath}/resources/images/newspaper_background.jpg)">
 
 <!-- The Modal -->
 <div id="regModal" class="modal">
   <!-- Modal content -->
-  <div class="modal-content" align="center" style="background-image: url(images/newspaper_background.jpg)">
+  <div class="modal-content" align="center" style="background-image: url(${pageContext.request.contextPath}/resources/images/newspaper_background.jpg)">
   		<c:import url="/WEB-INF/pages/modal/registration.jsp" />
   </div>
 
@@ -41,26 +41,26 @@
 		<div class="base-layout-wrapper">
 			<div class="menu">
 
-				<c:if test="${sessionScope.user_active == false}">
-				<br/>
-				<h4 style = "padding-left: 15px">
+<%-- 				<c:if test="${sessionScope.user_active == false}"> --%>
+<!-- 				<br/> -->
+<!-- 				<h4 style = "padding-left: 15px"> -->
 				    ${welcome_guest}
-				    </h4> 
-				</c:if>
-				<c:if test="${sessionScope.user_active == true}">
-					<c:import url="/WEB-INF/pages/tiles/menu.jsp" />
-				</c:if>
+<!-- 				    </h4>  -->
+<%-- 				</c:if> --%>
+<%-- 				<c:if test="${sessionScope.user_active == true}"> --%>
+<%-- 					<c:import url="/WEB-INF/pages/tiles/menu.jsp" /> --%>
+<%-- 				</c:if> --%>
 		</div>
 
 		<div class="content" style="
 		background-image: url(images/newspaper_design_cut1.jpg)">
 
-				<c:if test="${sessionScope.user_active == false}">
+<%-- 				<c:if test="${sessionScope.user_active == false}"> --%>
 					<c:import url="/WEB-INF/pages/tiles/guestInfo.jsp" />
-				</c:if>
-				<c:if test="${sessionScope.user_active == true}">
-					<c:import url="/WEB-INF/pages/tiles/body.jsp" />
-				</c:if>
+<%-- 				</c:if> --%>
+<%-- 				<c:if test="${sessionScope.user_active == true}"> --%>
+<%-- 					<c:import url="/WEB-INF/pages/tiles/body.jsp" /> --%>
+<%-- 				</c:if> --%>
 
 
 			</div>
@@ -72,7 +72,7 @@
 		</div>
 	</div>
 	
-<script type="text/javascript" src="./script/logRegForm.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/script/logRegForm.js"></script>
 	
 </body>
 </html>

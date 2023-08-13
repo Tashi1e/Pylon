@@ -1,6 +1,6 @@
 package jd2.tcejorptset.spring.bean;
 
-public enum UserRoles {
+public enum UserRole {
 	
 	ADMIN,
 	EDITOR,

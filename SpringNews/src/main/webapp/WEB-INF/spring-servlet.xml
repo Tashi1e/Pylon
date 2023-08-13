@@ -11,18 +11,20 @@
     	http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-	<!-- Step 3: Add support for component scanning -->
-	<context:component-scan base-package="by.htp.webpr" />
+	<context:component-scan base-package="jd2.tcejorptset.spring" />
 
-	<!-- Step 4: Add support for conversion, formatting and validation support -->
+	<!-- Add support for conversion, formatting and validation support -->
 	<mvc:annotation-driven/>
+	
+	<mvc:resources location="/resources/" mapping="/resources/**"></mvc:resources>
 
-	<!-- Step 5: Define Spring MVC view resolver -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="/WEB-INF/view/" />
+		<property name="prefix" value="/WEB-INF/pages/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
+	
+	<bean id="attributesContainer" class="jd2.tcejorptset.spring.controller.AttributesContainer" />
 
 </beans>
 
