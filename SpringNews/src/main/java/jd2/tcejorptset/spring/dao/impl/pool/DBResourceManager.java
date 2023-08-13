@@ -2,6 +2,7 @@ package jd2.tcejorptset.spring.dao.impl.pool;
 
 import java.util.ResourceBundle;
 
+@Deprecated
 public class DBResourceManager {
 
 	private final static DBResourceManager instance = new DBResourceManager();

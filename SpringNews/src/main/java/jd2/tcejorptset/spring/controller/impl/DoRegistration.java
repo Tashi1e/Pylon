@@ -10,13 +10,14 @@ import jd2.tcejorptset.spring.bean.ErrorCode;
 import jd2.tcejorptset.spring.bean.User;
 import jd2.tcejorptset.spring.bean.UserInfo;
 import jd2.tcejorptset.spring.controller.Command;
-import jd2.tcejorptset.spring.service.IUserService;
+import jd2.tcejorptset.spring.service.UserService;
 import jd2.tcejorptset.spring.service.ServiceException;
 import jd2.tcejorptset.spring.service.ServiceProvider;
 
+@Deprecated
 public class DoRegistration implements Command {
 
-	private final IUserService service = ServiceProvider.getInstance().getUserService();
+	private final UserService service = ServiceProvider.getInstance().getUserService();
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

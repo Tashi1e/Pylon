@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import jd2.tcejorptset.spring.controller.Command;
 
+@Deprecated
 public class GoToErrorPage implements Command{
 	
 	private String errorCode;

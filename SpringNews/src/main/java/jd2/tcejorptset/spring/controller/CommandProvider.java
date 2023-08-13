@@ -17,6 +17,7 @@ import jd2.tcejorptset.spring.controller.impl.GoToErrorPage;
 import jd2.tcejorptset.spring.controller.impl.GoToNewsList;
 import jd2.tcejorptset.spring.controller.impl.GoToViewNews;
 
+@Deprecated
 public final class CommandProvider {
 	private static final CommandProvider instance = new CommandProvider();
 	

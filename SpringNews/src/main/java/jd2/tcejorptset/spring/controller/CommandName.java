@@ -1,5 +1,6 @@
 package jd2.tcejorptset.spring.controller;
 
+@Deprecated
 public enum CommandName {
 	GO_TO_BASE_PAGE, 
 	GO_TO_LOGINATION_PAGE, 

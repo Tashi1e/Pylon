@@ -10,26 +10,27 @@ import javax.servlet.http.HttpServletResponse;
 
 import jd2.tcejorptset.spring.bean.ErrorCode;
 import jd2.tcejorptset.spring.bean.UserInfo;
-import jd2.tcejorptset.spring.bean.UserRoles;
+import jd2.tcejorptset.spring.bean.UserRole;
 import jd2.tcejorptset.spring.controller.Command;
-import jd2.tcejorptset.spring.service.IUserService;
+import jd2.tcejorptset.spring.service.UserService;
 import jd2.tcejorptset.spring.service.ServiceException;
 import jd2.tcejorptset.spring.service.ServiceProvider;
 import jd2.tcejorptset.spring.util.cookies.CookiesOps;
 import jd2.tcejorptset.spring.util.validation.UserDataValidation;
 import jd2.tcejorptset.spring.util.validation.ValidationProvider;
 
+@Deprecated
 public class DoSignIn implements Command {
 	
 	private static final String FIRST_TIME_ENTER_ATTRIBUTE = "firstEnter";
 
-	private final IUserService service = ServiceProvider.getInstance().getUserService();
+	private final UserService service = ServiceProvider.getInstance().getUserService();
 	private final UserDataValidation userAuthValidation = ValidationProvider.getInstance().getUserDataValidation();
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String role = UserRoles.GUEST.getRole();
+		String role = UserRole.GUEST.getRole();
 		UserInfo userInfo = null;
 		String selector = null;
 		String validator = null;
@@ -49,7 +50,7 @@ public class DoSignIn implements Command {
 //				System.out.println(role); // TEST
 			}
 		
-			if (role != null && !role.equals(UserRoles.GUEST.getRole())) {
+			if (role != null && !role.equals(UserRole.GUEST.getRole())) {
 //				System.out.println(role); //TEST
 //				System.out.println("DoSignIn -> update user token"); // TEST
 				response = addCookie(response, service.updateUserToken(selector, validator));
@@ -69,7 +70,7 @@ public class DoSignIn implements Command {
 				role = service.signIn(login, password);
 				userInfo = service.getUserInfo(login, password);
 			}
-			if (role != null && !role.equals(UserRoles.GUEST.getRole())) {
+			if (role != null && !role.equals(UserRole.GUEST.getRole())) {
 				if (checkbox) {
 					response = addCookie(response, service.addUserToken(login, password));
 				}

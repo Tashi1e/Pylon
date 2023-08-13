@@ -13,12 +13,12 @@ import java.util.Date;
 import java.util.List;
 
 import jd2.tcejorptset.spring.bean.News;
-import jd2.tcejorptset.spring.dao.INewsDAO;
+import jd2.tcejorptset.spring.dao.NewsDAO;
 import jd2.tcejorptset.spring.dao.NewsDAOException;
 import jd2.tcejorptset.spring.dao.impl.pool.ConnectionPool;
 import jd2.tcejorptset.spring.dao.impl.pool.ConnectionPoolException;
 
-public class NewsDAO implements INewsDAO {
+public class NewsDAOimpl implements NewsDAO {
 
 	private final ConnectionPool connectionPool = ConnectionPool.getInstance();
 	private final ContentIO contentTextIO = ContentIO.getInstance();

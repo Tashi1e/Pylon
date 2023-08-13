@@ -1,5 +1,6 @@
 package jd2.tcejorptset.spring.dao.impl.pool;
 
+@Deprecated
 public final class DBParameter {
 	
 	private DBParameter(){}

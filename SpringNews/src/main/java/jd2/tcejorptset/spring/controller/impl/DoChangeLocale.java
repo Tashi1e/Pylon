@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import jd2.tcejorptset.spring.controller.Command;
 
+@Deprecated
 public class DoChangeLocale implements Command {
 	
 	private final static String CURRENT_PAGE_URL_ATTRIBUTE = "pageURL";

@@ -1,5 +1,6 @@
 package jd2.tcejorptset.spring.dao;
 
+@Deprecated
 public class DaoException extends Exception {
 	private static final long serialVersionUID = 8814453066415187129L;
 

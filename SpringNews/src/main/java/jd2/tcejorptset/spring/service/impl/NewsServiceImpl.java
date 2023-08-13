@@ -4,14 +4,15 @@ import java.util.List;
 
 import jd2.tcejorptset.spring.bean.News;
 import jd2.tcejorptset.spring.dao.DaoProvider;
-import jd2.tcejorptset.spring.dao.INewsDAO;
+import jd2.tcejorptset.spring.dao.NewsDAO;
 import jd2.tcejorptset.spring.dao.NewsDAOException;
-import jd2.tcejorptset.spring.service.INewsService;
+import jd2.tcejorptset.spring.service.NewsService;
 import jd2.tcejorptset.spring.service.ServiceException;
 
-public class NewsServiceImpl implements INewsService{
+@Deprecated
+public class NewsServiceImpl implements NewsService{
 
-	private final INewsDAO newsDAO = DaoProvider.getInstance().getNewsDAO();
+	private final NewsDAO newsDAO = DaoProvider.getInstance().getNewsDAO();
 	
 	
 	@Override

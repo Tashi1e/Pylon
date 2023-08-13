@@ -5,7 +5,7 @@ import java.util.List;
 import jd2.tcejorptset.spring.bean.News;
 
 
-public interface INewsDAO {
+public interface NewsDAO {
 	List<News> getListByKeyword(String keyword) throws NewsDAOException;
 	List<News> getLatestsList(int count) throws NewsDAOException;
 	News fetchById(int newsId) throws NewsDAOException;

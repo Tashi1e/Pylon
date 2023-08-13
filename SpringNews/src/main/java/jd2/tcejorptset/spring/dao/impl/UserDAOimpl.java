@@ -11,7 +11,7 @@ import jd2.tcejorptset.spring.bean.ErrorCode;
 import jd2.tcejorptset.spring.bean.User;
 import jd2.tcejorptset.spring.bean.UserInfo;
 import jd2.tcejorptset.spring.dao.DaoException;
-import jd2.tcejorptset.spring.dao.IUserDAO;
+import jd2.tcejorptset.spring.dao.UserDAO;
 import jd2.tcejorptset.spring.dao.impl.pool.ConnectionPool;
 import jd2.tcejorptset.spring.dao.impl.pool.ConnectionPoolException;
 import jd2.tcejorptset.spring.util.encrypt.Encryptor;
@@ -22,7 +22,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-public class UserDAO implements IUserDAO {
+public class UserDAOimpl implements UserDAO {
 
 	private final ConnectionPool connectionPool = ConnectionPool.getInstance();
 	private final Encryptor encryptorB = new HashB();

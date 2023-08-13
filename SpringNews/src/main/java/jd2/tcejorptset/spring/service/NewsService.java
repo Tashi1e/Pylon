@@ -4,7 +4,7 @@ import java.util.List;
 
 import jd2.tcejorptset.spring.bean.News;
 
-public interface INewsService {
+public interface NewsService {
 	
   void save(News news) throws ServiceException;
   void update(News news) throws ServiceException;

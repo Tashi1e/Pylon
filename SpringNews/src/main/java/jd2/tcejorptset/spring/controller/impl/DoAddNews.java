@@ -11,13 +11,14 @@ import jd2.tcejorptset.spring.bean.ErrorCode;
 import jd2.tcejorptset.spring.bean.News;
 import jd2.tcejorptset.spring.bean.UserInfo;
 import jd2.tcejorptset.spring.controller.Command;
-import jd2.tcejorptset.spring.service.INewsService;
+import jd2.tcejorptset.spring.service.NewsService;
 import jd2.tcejorptset.spring.service.ServiceException;
 import jd2.tcejorptset.spring.service.ServiceProvider;
 
+@Deprecated
 public class DoAddNews implements Command {
 	
-	INewsService newsService = ServiceProvider.getInstance().getNewsService();
+	NewsService newsService = ServiceProvider.getInstance().getNewsService();
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

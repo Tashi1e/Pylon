@@ -5,7 +5,7 @@ import java.util.Map;
 import jd2.tcejorptset.spring.bean.User;
 import jd2.tcejorptset.spring.bean.UserInfo;
 
-public interface IUserService {
+public interface UserService {
 	
 	String signIn (String login, String password) throws ServiceException;
 	String signInByToken (String selector, String validator) throws ServiceException;

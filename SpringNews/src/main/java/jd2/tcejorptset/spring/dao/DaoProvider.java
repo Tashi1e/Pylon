@@ -1,24 +1,25 @@
 package jd2.tcejorptset.spring.dao;
 
-import jd2.tcejorptset.spring.dao.impl.NewsDAO;
-import jd2.tcejorptset.spring.dao.impl.UserDAO;
+import jd2.tcejorptset.spring.dao.impl.NewsDAOimpl;
+import jd2.tcejorptset.spring.dao.impl.UserDAOimpl;
 
+@Deprecated
 public final class DaoProvider {
 	private static final DaoProvider instance = new DaoProvider();
 
-	private final IUserDAO userDao = new UserDAO();
-	private final INewsDAO newsDAO = new NewsDAO();
+	private final UserDAO userDao = new UserDAOimpl();
+	private final NewsDAO newsDAO = new NewsDAOimpl();
 	
 	
 	private DaoProvider() {
 	}
 	
 	
-	public IUserDAO getUserDao() {
+	public UserDAO getUserDao() {
 		return userDao;
 	}
 	
-	public INewsDAO getNewsDAO() {
+	public NewsDAO getNewsDAO() {
 		return newsDAO;
 	}
 

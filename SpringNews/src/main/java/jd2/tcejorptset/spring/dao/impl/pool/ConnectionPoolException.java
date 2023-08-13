@@ -1,5 +1,6 @@
 package jd2.tcejorptset.spring.dao.impl.pool;
 
+@Deprecated
 public class ConnectionPoolException extends Exception {
 	
 	private static final long serialVersionUID = -7251000565287359510L;

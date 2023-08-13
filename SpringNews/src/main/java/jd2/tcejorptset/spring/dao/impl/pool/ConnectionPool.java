@@ -23,6 +23,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executor;
 
+@Deprecated
 public final class ConnectionPool {
 	
 	private static final ConnectionPool instance = new ConnectionPool();

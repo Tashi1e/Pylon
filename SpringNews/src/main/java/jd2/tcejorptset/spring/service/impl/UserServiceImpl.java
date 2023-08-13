@@ -7,13 +7,14 @@ import jd2.tcejorptset.spring.bean.UserInfo;
 import jd2.tcejorptset.spring.bean.UserRole;
 import jd2.tcejorptset.spring.dao.DaoException;
 import jd2.tcejorptset.spring.dao.DaoProvider;
-import jd2.tcejorptset.spring.dao.IUserDAO;
-import jd2.tcejorptset.spring.service.IUserService;
+import jd2.tcejorptset.spring.dao.UserDAO;
+import jd2.tcejorptset.spring.service.UserService;
 import jd2.tcejorptset.spring.service.ServiceException;
 
-public class UserServiceImpl implements IUserService {
+@Deprecated
+public class UserServiceImpl implements UserService {
 	
-	private final IUserDAO userDAO = DaoProvider.getInstance().getUserDao();
+	private final UserDAO userDAO = DaoProvider.getInstance().getUserDao();
 
 	@Override
 	public String signIn(String login, String password) throws ServiceException {

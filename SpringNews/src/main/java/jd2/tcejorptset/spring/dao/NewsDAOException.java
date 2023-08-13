@@ -1,6 +1,6 @@
 package jd2.tcejorptset.spring.dao;
 
-
+@Deprecated
 public class NewsDAOException extends Exception{
 
 	private static final long serialVersionUID = 1L;

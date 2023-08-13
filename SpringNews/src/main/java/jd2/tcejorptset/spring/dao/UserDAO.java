@@ -5,7 +5,7 @@ import java.util.Map;
 import jd2.tcejorptset.spring.bean.User;
 import jd2.tcejorptset.spring.bean.UserInfo;
 
-public interface IUserDAO {
+public interface UserDAO {
 	
 	Integer getUserId (String login, String password) throws DaoException;
 	

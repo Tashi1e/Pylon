@@ -1,6 +1,6 @@
 package jd2.tcejorptset.spring.service;
 
-
+@Deprecated
 public class ServiceException extends Exception {
 
 	private static final long serialVersionUID = -3017979106026363030L;
