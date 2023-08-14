@@ -12,15 +12,16 @@ import jd2.tcejorptset.spring.bean.User;
 import jd2.tcejorptset.spring.bean.UserInfo;
 import jd2.tcejorptset.spring.service.UserService;
 import jd2.tcejorptset.spring.service.ServiceException;
-import jd2.tcejorptset.spring.service.ServiceProvider;
+import jd2.tcejorptset.spring.service.ServiceProvider; 
 
 @Controller
 public class LoginationProcess {
 	
-	private final UserService service = ServiceProvider.getInstance().getUserService();
+	@Autowired
+	private UserService service;
 
 	@Autowired
-	private Map <String, Object> attributesContainer;
+	private Map <String, Object> attributesContainer; 
 	
 	@RequestMapping ("/login")
 	public String showLoginPage(Model model) {
@@ -49,13 +50,13 @@ public class LoginationProcess {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-		return "layouts/baseLayout";
+		return "redirect:/login";
 	}
 	
 	@RequestMapping ("/signout")
-	public String doSignOut(@ModelAttribute("loginData") User user, Model model) {
+	public String doSignOut(Model model) {
 		attributesContainer.clear();
 		model.addAllAttributes(attributesContainer);
-		return "layouts/baseLayout";
+		return "redirect:/login";
 	}	
 }

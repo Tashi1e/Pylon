@@ -2,6 +2,8 @@ package jd2.tcejorptset.spring.service.impl;
 
 import java.util.Map;
 
+import org.springframework.stereotype.Service;
+
 import jd2.tcejorptset.spring.bean.User;
 import jd2.tcejorptset.spring.bean.UserInfo;
 import jd2.tcejorptset.spring.bean.UserRole;
@@ -11,7 +13,7 @@ import jd2.tcejorptset.spring.dao.UserDAO;
 import jd2.tcejorptset.spring.service.UserService;
 import jd2.tcejorptset.spring.service.ServiceException;
 
-@Deprecated
+@Service
 public class UserServiceImpl implements UserService {
 	
 	private final UserDAO userDAO = DaoProvider.getInstance().getUserDao();
