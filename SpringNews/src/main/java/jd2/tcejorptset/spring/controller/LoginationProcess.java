@@ -12,7 +12,7 @@ import jd2.tcejorptset.spring.bean.User;
 import jd2.tcejorptset.spring.bean.UserInfo;
 import jd2.tcejorptset.spring.service.UserService;
 import jd2.tcejorptset.spring.service.ServiceException;
-import jd2.tcejorptset.spring.service.ServiceProvider;
+import jd2.tcejorptset.spring.service.ServiceProvider; 
 
 @Controller
 public class LoginationProcess {
@@ -20,7 +20,7 @@ public class LoginationProcess {
 	private final UserService service = ServiceProvider.getInstance().getUserService();
 
 	@Autowired
-	private Map <String, Object> attributesContainer;
+	private Map <String, Object> attributesContainer; 
 	
 	@RequestMapping ("/login")
 	public String showLoginPage(Model model) {
