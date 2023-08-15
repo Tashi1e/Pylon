@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import jd2.tcejorptset.spring.service.UserService;
+import jd2.tcejorptset.spring.dto.UserData;
 import jd2.tcejorptset.spring.entity.User;
 import jd2.tcejorptset.spring.entity.UserInfo;
 
@@ -24,7 +25,7 @@ public class LoginationProcess {
 	@RequestMapping ("/login")
 	public String showLoginPage(Model model) {
 		attributesContainer.put("loginData", new User());
-		attributesContainer.put("userData", new UserInfo());
+		attributesContainer.put("userData", new UserData());
 		model.addAllAttributes(attributesContainer);
 //		model.addAttribute("loginData", new User());
 		return "layouts/baseLayout";
@@ -57,8 +58,9 @@ public class LoginationProcess {
 	}	
 	
 	@RequestMapping ("/register")
-	public String doRegister (@ModelAttribute("loginData") User user, @ModelAttribute("userData") UserInfo userInfo) {
-	return null;	
+	public String doRegister (@ModelAttribute("userData") UserData userData) {
+		System.out.println(userData); //TEST
+	return "redirect:/login";	
 	}
 	
 }

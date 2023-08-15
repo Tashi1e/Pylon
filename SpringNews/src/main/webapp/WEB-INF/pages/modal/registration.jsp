@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <fmt:setLocale value="${sessionScope.locale}" />
 <fmt:setBundle basename="localization.locale" var="loc" />
@@ -20,20 +21,18 @@
 
 <h2 align = "center">${fillForm}</h2>
 
-<form method="post" action="controller" >
-<input type="hidden" name="command" value="do_registration">
-
+<form:form action="register" modelAttribute="userData" >
 <table class="regFormTable">
 <tr>
 <td>
 <span class = "ph-container">
-<input type="text" class="regFormText" name="firstname" id = "first" placeholder=" " autocomplete = "new-name">
+<form:input class="regFormText" path="firstName" id = "first" placeholder=" " autocomplete = "new-name" />
 <label for = "first">${firstname}</label>
 </span>
 </td>
 <td>
 <span class = "ph-container">
-<input type="text" class="regFormText" name="lastname" id = "last" placeholder=" " autocomplete = "new-name">
+<form:input class="regFormText" path="lastName" id = "last" placeholder=" " autocomplete = "new-name" />
 <label for = "last">${lastname}</label>
 </span>
 </td>
@@ -42,13 +41,13 @@
 <tr>
 <td>
 <span class = "ph-container">
-<input type="text" class="regFormText" name="nickname" id = "nick" placeholder=" " autocomplete = "new-name">
+<form:input class="regFormText" path="nickName" id = "nick" placeholder=" " autocomplete = "new-name" />
 <label for = "nick">${nickname}</label>
 </span>
 </td>
 <td>
 <span class = "ph-container">
-<input type="email" class="regFormText" name="email" id = "email" placeholder=" " required autocomplete = "new-email">
+<form:input class="regFormText" path="email" id = "email" placeholder=" " autocomplete = "new-email" />
 <label for = "email">${email}</label>
 </span>
 </td>
@@ -57,8 +56,8 @@
 <tr>
 <td>
 <span class = "ph-container">
-<input type="text" class="regFormText" name="login" placeholder=" " autocomplete = "new-name">
-<label for = "login">${login}</label>
+<form:input class="regFormText" path="login" id="log" placeholder=" " autocomplete = "new-name" />
+<label for = "log">${login}</label>
 </span>
 </td>
 <td style="padding: 20px">
@@ -68,13 +67,13 @@
 <tr>
 <td>
 <span class = "ph-container">
-<input type="password" class="regFormText" name="password" id="pass" placeholder=" " required autocomplete = "new-password">
+<form:password class="regFormText" path="password" id="pass" placeholder=" " autocomplete = "new-password" />
 <label for="pass">${password}</label>
 </span>
 </td>
 <td>
 <span class = "ph-container">
-<input type="password" class="regFormText" id="passRep" placeholder=" " required autocomplete = "new-password">
+<input type="password" class="regFormText" id="passRep" placeholder=" " autocomplete = "new-password">
 <label for="passRep">${repeatPass}</label>
 </span>
 </td>
@@ -94,4 +93,4 @@
 </td>
 </tr>
 </table>
-</form>
+</form:form>

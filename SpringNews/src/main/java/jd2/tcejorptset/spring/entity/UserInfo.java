@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -47,8 +49,8 @@ public class UserInfo{
 	@Column(name="register_date")
 	private Timestamp userRegDate;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "users_id")
-	private User user;
+//	@OneToOne(cascade = CascadeType.ALL)
+//	@JoinColumn(name = "users_id")
+//	private User user;
 	
 }

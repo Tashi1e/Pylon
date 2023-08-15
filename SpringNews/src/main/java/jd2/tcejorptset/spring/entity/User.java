@@ -51,10 +51,10 @@ public class User {
 //			   cascade= {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
 //	private List<News> newsList;
 //	
-	@OneToOne(fetch=FetchType.LAZY,
-			  mappedBy="users", 
-			  cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-	private UserInfo userInfo;
+//	@OneToOne(fetch=FetchType.LAZY,
+//			  mappedBy="users", 
+//			  cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+//	private UserInfo userInfo;
 	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE, 
 			CascadeType.DETACH,CascadeType.REFRESH })
