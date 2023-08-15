@@ -1,7 +1,9 @@
 package jd2.tcejorptset.spring.util.encrypt;
 
 import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.stereotype.Component;
 
+@Component
 public class HashB implements Encryptor {
 
 	@Override

@@ -2,16 +2,16 @@ package jd2.tcejorptset.spring.service;
 
 import java.util.List;
 
-import jd2.tcejorptset.spring.bean.News;
+import jd2.tcejorptset.spring.entity.News;
 
 public interface NewsService {
 	
-  void save(News news) throws ServiceException;
-  void update(News news) throws ServiceException;
-  void delete(int [] newsId) throws ServiceException;
+  void save(News news);
+  void update(News news);
+  void delete(int [] newsId);
   
-  List<News> latestList(int count)  throws ServiceException;
-  List<News> latestList()  throws ServiceException;
-  List<News> find(String keyWord) throws ServiceException;
-  News findById(int id) throws ServiceException;
+  List<News> latestList(int count);
+  List<News> latestList();
+  List<News> find(String keyWord);
+  News findById(int id);
 }

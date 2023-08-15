@@ -1,4 +1,4 @@
-package jd2.tcejorptset.spring.dao.impl;
+package jd2.tcejorptset.spring.dao;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

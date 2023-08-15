@@ -21,8 +21,4 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
-	<listener>
-		<listener-class>jd2.tcejorptset.spring.controller.listeners.ConnectionPoolOpsListener</listener-class>
-	</listener>
-
 </web-app>

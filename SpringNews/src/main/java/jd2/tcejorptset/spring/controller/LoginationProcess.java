@@ -8,11 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import jd2.tcejorptset.spring.bean.User;
-import jd2.tcejorptset.spring.bean.UserInfo;
 import jd2.tcejorptset.spring.service.UserService;
-import jd2.tcejorptset.spring.service.ServiceException;
-import jd2.tcejorptset.spring.service.ServiceProvider; 
+import jd2.tcejorptset.spring.entity.User;
+import jd2.tcejorptset.spring.entity.UserInfo;
 
 @Controller
 public class LoginationProcess {
@@ -26,6 +24,7 @@ public class LoginationProcess {
 	@RequestMapping ("/login")
 	public String showLoginPage(Model model) {
 		attributesContainer.put("loginData", new User());
+		attributesContainer.put("userData", new UserInfo());
 		model.addAllAttributes(attributesContainer);
 //		model.addAttribute("loginData", new User());
 		return "layouts/baseLayout";
@@ -35,21 +34,18 @@ public class LoginationProcess {
 	public String doSignIn(@ModelAttribute("loginData") User user, Model model) {
 		
 //		System.out.printf("Login: %s\nPassword: %s\n", user.getLogin(), user.getPassword()); //TEST
-				try {
+		
 					String role = service.signIn(user.getLogin(), user.getPassword());
-					UserInfo userInfo = service.getUserInfo(user.getLogin(), user.getPassword());
-					if(role != null && userInfo != null) {
+					UserInfo userInfo = new UserInfo();
+					userInfo.setNickName("Test Name");
+					if(role != null) {
 						attributesContainer.put("role", role);
 						attributesContainer.put("userInfo", userInfo);
 						attributesContainer.put("presentation", "newsList");
 					}
 					model.addAllAttributes(attributesContainer);
 //					System.out.println(); //TEST
-					
-				} catch (ServiceException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				
 		return "redirect:/login";
 	}
 	
@@ -59,4 +55,10 @@ public class LoginationProcess {
 		model.addAllAttributes(attributesContainer);
 		return "redirect:/login";
 	}	
+	
+	@RequestMapping ("/register")
+	public String doRegister (@ModelAttribute("loginData") User user, @ModelAttribute("userData") UserInfo userInfo) {
+	return null;	
+	}
+	
 }

@@ -51,7 +51,7 @@
 	
 	<div class="header-grid-item-login" align="right">
 	<c:if test="${role eq 'guest' or role == null}">
-				<form:form action="signin" modelAttribute="loginData" id="box">
+				<form:form action="signin" modelAttribute="loginData" modelAttribute="userData" id="box">
 			<input type="checkbox" name="remember_me" value="${remembButton}" id="checkbox" style="display: none" />
 			<input type="hidden" class = "button grey" value="${signinButton}" id="signin" />
 			<input type="button" class = "button transperent" value="${loginButton}" id="login" /> 
