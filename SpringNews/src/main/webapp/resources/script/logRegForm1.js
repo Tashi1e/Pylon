@@ -21,7 +21,6 @@ btn1.onclick = function() {
 			else {
 				btn4.value = '\u{2713} '+check.value;
 			}
-
 			btn2.classList.add('checkbox');
 			for (let lbl of lable) {
 				lbl.style.visibility = 'visible';
@@ -39,6 +38,14 @@ btn4.onclick = function() {
 		btn4.value = '\u{2717} '+check.value;
 	}
 }
+
+window.addEventListener('focusout', function(e) {
+	if(e.target.classList.contains('text') && e.target.value.length > 0){
+		e.target.classList.add('labelUp');
+	} else {
+		e.target.classList.remove('labelUp');
+	}
+});
 
 window.addEventListener('click', function(e) {
 	if (!box.contains(e.target) && !btn1.contains(e.target)) {

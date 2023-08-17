@@ -71,9 +71,10 @@
 <label for="pass">${password}</label>
 </span>
 </td>
+
 <td>
 <span class = "ph-container">
-<input type="password" class="regFormText" id="passRep" placeholder=" " autocomplete = "new-password">
+<input class="regFormText" type="password" id="passRep" placeholder=" " autocomplete = "new-password" />
 <label for="passRep">${repeatPass}</label>
 </span>
 </td>

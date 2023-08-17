@@ -19,7 +19,7 @@
 <fmt:message bundle="${loc}" key="local.headline.title" />
 </title>
 
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/styles/newsStyle30.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/styles/newsStyle33.css">
 
 </head>
 <body style="background-image: url(${pageContext.request.contextPath}/resources/images/newspaper_background.jpg)">
@@ -72,7 +72,7 @@
 		</div>
 	</div>
 	
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/script/logRegForm.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/script/logRegForm1.js"></script>
 	
 </body>
 </html>

@@ -482,10 +482,9 @@ a:visited {
 	left: 5%;
 	position: absolute;
 	transition: all 200ms;
-/*	visibility: hidden;*/
 }
 
-.ph-container>input:focus+label, .ph-container>input:not(:placeholder-shown)+label
+.ph-container>input:focus+label, .ph-container>input.labelUp+label
 	{
 	top: -50%;
 /*	left: 10px;*/
@@ -537,7 +536,7 @@ input.text:focus,
 	box-shadow: 0 0 0 0.2rem rgba(95, 95, 105, 0.25);
 }
 
-.regFormText {
+.ph-container>.regFormText {
 	border-radius: 5px;
 	border-color: rgba(110, 110, 120, 0.75);
 	background-color: transparent;
@@ -550,14 +549,14 @@ input.text:focus,
 	font-family: "Times New Roman";
 }
 
-.ph-container>.regFormText:focus+label, .ph-container>.regFormText:not(:placeholder-shown)+label
+.ph-container>.regFormText:focus+label, .ph-container>.regFormText.labelUp+label
 	{
 	top: -140%;
 /*	left: 10px;*/
 	font-size: 14px;
 }
 
-.regFormText+label{
+.ph-container>.regFormText+label{
 	top: -0.1em;
 }
 

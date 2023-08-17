@@ -14,8 +14,6 @@
 <fmt:message bundle="${loc}" key="local.password.label.name" var="passLabel" />
 <fmt:message bundle="${loc}" key="local.error.code.${sessionScope.errorCode}" var="errorMessage" />
 
-<!-- <link rel="stylesheet" type="text/css" href="./styles/loginFormStyles123.css"> -->
-
 <div class="header-grid-container">
 
 	<div class="header-grid-item-logo">
@@ -51,7 +49,7 @@
 	
 	<div class="header-grid-item-login" align="right">
 	<c:if test="${role eq 'guest' or role == null}">
-				<form:form action="signin" modelAttribute="loginData" id="box">
+		<form:form action="signin" modelAttribute="userData" id="box">
 			<input type="checkbox" name="remember_me" value="${remembButton}" id="checkbox" style="display: none" />
 			<input type="hidden" class = "button grey" value="${signinButton}" id="signin" />
 			<input type="button" class = "button transperent" value="${loginButton}" id="login" /> 
@@ -68,11 +66,11 @@
 				</form:form>
 		</c:if>
 		
-		<c:if test="${not(role eq 'guest') and role != null}">
-			<form:form action="signout">
+	<c:if test="${not(role eq 'guest') and role != null}">
+		<form:form action="signout">
 			<input type="submit" class="button transperent" value="${signoutButton}" id="signOut" /> 
-				</form:form>
-		</c:if>
+		</form:form>
+	</c:if>
 	</div>
 	
 </div>
