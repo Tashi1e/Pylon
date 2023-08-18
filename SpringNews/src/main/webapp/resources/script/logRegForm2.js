@@ -40,10 +40,12 @@ btn4.onclick = function() {
 }
 
 window.addEventListener('focusout', function(e) {
-	if(e.target.classList.contains('text') && e.target.value.length > 0){
+	if((e.target.classList.contains('loginForm') || e.target.classList.contains('regFormText')) && e.target.value.length > 0){
 		e.target.classList.add('labelUp');
+//		alert(e.target.className);
 	} else {
 		e.target.classList.remove('labelUp');
+//		alert(e.target.className);
 	}
 });
 

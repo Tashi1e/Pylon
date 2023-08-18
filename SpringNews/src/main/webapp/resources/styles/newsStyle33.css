@@ -484,7 +484,7 @@ a:visited {
 	transition: all 200ms;
 }
 
-.ph-container>input:focus+label, .ph-container>input.labelUp+label
+.ph-container>loginForm:focus+label, .ph-container>loginForm.labelUp+label
 	{
 	top: -50%;
 /*	left: 10px;*/
@@ -500,7 +500,7 @@ a:visited {
 	width: 0%;
 }
 
-input.text.loginForm {
+.text.loginForm {
 	padding-left: 5px;
 	padding-right: 5px;
 	border-width: default;

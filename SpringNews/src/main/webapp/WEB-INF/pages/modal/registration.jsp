@@ -26,13 +26,13 @@
 <tr>
 <td>
 <span class = "ph-container">
-<form:input class="regFormText" path="firstName" id = "first" placeholder=" " autocomplete = "new-name" />
+<form:input class="regFormText" path="userInfo.firstName" id = "first" placeholder=" " autocomplete = "new-name" />
 <label for = "first">${firstname}</label>
 </span>
 </td>
 <td>
 <span class = "ph-container">
-<form:input class="regFormText" path="lastName" id = "last" placeholder=" " autocomplete = "new-name" />
+<form:input class="regFormText" path="userInfo.lastName" id = "last" placeholder=" " autocomplete = "new-name" />
 <label for = "last">${lastname}</label>
 </span>
 </td>
@@ -41,13 +41,13 @@
 <tr>
 <td>
 <span class = "ph-container">
-<form:input class="regFormText" path="nickName" id = "nick" placeholder=" " autocomplete = "new-name" />
+<form:input class="regFormText" path="userInfo.nickName" id = "nick" placeholder=" " autocomplete = "new-name" />
 <label for = "nick">${nickname}</label>
 </span>
 </td>
 <td>
 <span class = "ph-container">
-<form:input class="regFormText" path="email" id = "email" placeholder=" " autocomplete = "new-email" />
+<form:input class="regFormText" path="userInfo.email" id = "email" placeholder=" " autocomplete = "new-email" />
 <label for = "email">${email}</label>
 </span>
 </td>
@@ -56,7 +56,7 @@
 <tr>
 <td>
 <span class = "ph-container">
-<form:input class="regFormText" path="login" id="log" placeholder=" " autocomplete = "new-name" />
+<form:input class="regFormText" path="user.login" id="log" placeholder=" " autocomplete = "new-name" />
 <label for = "log">${login}</label>
 </span>
 </td>
@@ -67,7 +67,7 @@
 <tr>
 <td>
 <span class = "ph-container">
-<form:password class="regFormText" path="password" id="pass" placeholder=" " autocomplete = "new-password" />
+<form:password class="regFormText" path="user.password" id="pass" placeholder=" " autocomplete = "new-password" />
 <label for="pass">${password}</label>
 </span>
 </td>

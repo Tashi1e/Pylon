@@ -72,7 +72,7 @@
 		</div>
 	</div>
 	
-<script type="text/javascript" src="${pageContext.request.contextPath}/resources/script/logRegForm1.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/script/logRegForm2.js"></script>
 	
 </body>
 </html>

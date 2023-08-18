@@ -37,10 +37,14 @@ public class UserRole {
 	@Column(name = "role_name")
 	private String role;
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
-			CascadeType.REFRESH })
-	@JoinTable(name = "users_has_roles", 
-	joinColumns = @JoinColumn(name = "roles_id", referencedColumnName = "id"), 
-	inverseJoinColumns = @JoinColumn(name = "users_id", referencedColumnName = "id"))
-	private List<User> userList;
+//	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH,
+//			CascadeType.REFRESH })
+//	@JoinTable(name = "users_has_roles", 
+//	joinColumns = @JoinColumn(name = "roles_id", referencedColumnName = "id"), 
+//	inverseJoinColumns = @JoinColumn(name = "users_id", referencedColumnName = "id"))
+//	private List<User> userList;
+	
+	public UserRole (String role) {
+		this.role = role;
+	}
 }

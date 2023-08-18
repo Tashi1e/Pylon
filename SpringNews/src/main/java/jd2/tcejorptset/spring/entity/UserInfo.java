@@ -9,7 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -26,10 +28,11 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode
 @NoArgsConstructor
 
+@Component
 @Entity
 @Table(name="user_details")
 public class UserInfo{
-
+	
 	@Id
 	@Column(name = "users_id")
 	private int id;
@@ -49,8 +52,7 @@ public class UserInfo{
 	@Column(name="register_date")
 	private Timestamp userRegDate;
 	
-//	@OneToOne(cascade = CascadeType.ALL)
-//	@JoinColumn(name = "users_id")
+//	@OneToOne(mappedBy="userInfo")
 //	private User user;
 	
 }

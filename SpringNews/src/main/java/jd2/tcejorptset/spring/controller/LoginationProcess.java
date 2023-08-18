@@ -34,7 +34,7 @@ public class LoginationProcess {
 	@RequestMapping ("/signin")
 	public String doSignIn(@ModelAttribute("loginData") User user, Model model) {
 		
-//		System.out.printf("Login: %s\nPassword: %s\n", user.getLogin(), user.getPassword()); //TEST
+//		System.out.printf("Login: %s\nPassword: %s\n", user.getLogin(), user.getPassword()); //FLAG
 		
 					String role = service.signIn(user.getLogin(), user.getPassword());
 					UserInfo userInfo = new UserInfo();
@@ -45,7 +45,7 @@ public class LoginationProcess {
 						attributesContainer.put("presentation", "newsList");
 					}
 					model.addAllAttributes(attributesContainer);
-//					System.out.println(); //TEST
+//					System.out.println(); //FLAG
 				
 		return "redirect:/login";
 	}
@@ -59,7 +59,9 @@ public class LoginationProcess {
 	
 	@RequestMapping ("/register")
 	public String doRegister (@ModelAttribute("userData") UserData userData) {
-		System.out.println(userData); //TEST
+//		System.out.println(userData.getUser()); //FLAG
+//		System.out.println(userData.getUserInfo()); //FLAG
+		service.registration(userData.getUser(), userData.getUserInfo());
 	return "redirect:/login";	
 	}
 	

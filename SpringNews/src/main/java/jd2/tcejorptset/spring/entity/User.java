@@ -14,6 +14,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -50,17 +51,19 @@ public class User {
 //			   mappedBy="users",
 //			   cascade= {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
 //	private List<News> newsList;
-//	
-//	@OneToOne(fetch=FetchType.LAZY,
-//			  mappedBy="users", 
-//			  cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-//	private UserInfo userInfo;
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE, 
-			CascadeType.DETACH,CascadeType.REFRESH })
-	@JoinTable(name = "users_has_roles", 
-			joinColumns = @JoinColumn(name = "users_id", referencedColumnName="id"), 
-			inverseJoinColumns = @JoinColumn(name = "roles_id", referencedColumnName="id"))
-	private List <UserRole> userRoleList;
+	@OneToOne(cascade = CascadeType.ALL)
+	private UserInfo userInfo;
+	
+//	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE, 
+//			CascadeType.DETACH,CascadeType.REFRESH })
+//	@JoinTable(name = "users_has_roles", 
+//			joinColumns = @JoinColumn(name = "users_id", referencedColumnName="id"), 
+//			inverseJoinColumns = @JoinColumn(name = "roles_id", referencedColumnName="id"))
+//	private List <UserRole> userRoleList;
 
+	public User (String login, String password) {
+		this.login = login;
+		this.password = password;
+	}
 }

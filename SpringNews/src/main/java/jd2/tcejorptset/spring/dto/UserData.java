@@ -1,9 +1,9 @@
 package jd2.tcejorptset.spring.dto;
 
-import java.sql.Timestamp;
-
 import org.springframework.stereotype.Component;
 
+import jd2.tcejorptset.spring.entity.User;
+import jd2.tcejorptset.spring.entity.UserInfo;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,12 +19,6 @@ import lombok.ToString;
 @Component
 public class UserData {
 	
-	private int id;
-	private String login;
-	private String password;
-	private String firstName;
-	private String lastName;
-	private String nickName;
-	private String email;
-	private Timestamp userRegDate;
+	private User user;
+	private UserInfo userInfo;
 }
