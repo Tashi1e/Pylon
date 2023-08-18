@@ -34,7 +34,8 @@ import lombok.EqualsAndHashCode;
 public class UserInfo{
 	
 	@Id
-	@Column(name = "users_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private int id;
 	
 	@Column(name="firstname")
@@ -52,7 +53,7 @@ public class UserInfo{
 	@Column(name="register_date")
 	private Timestamp userRegDate;
 	
-//	@OneToOne(mappedBy="userInfo")
-//	private User user;
+	@OneToOne(mappedBy="userInfo", cascade=CascadeType.ALL)
+	private User user;
 	
 }
