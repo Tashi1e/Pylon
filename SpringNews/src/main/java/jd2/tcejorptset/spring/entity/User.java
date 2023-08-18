@@ -1,5 +1,6 @@
 package jd2.tcejorptset.spring.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -9,9 +10,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -25,7 +23,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Getter 
+@Getter
 @Setter
 @ToString
 @EqualsAndHashCode
@@ -33,28 +31,32 @@ import lombok.ToString;
 
 @Component
 @Entity
-@Table (name="users")
+@Table(name = "users")
 public class User {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id")
-	private int id;
-	
-	@Column(name="login")
+	@Column(name = "login")
 	private String login;
-	
-	@Column(name="password")
+
+	@Column(name = "password")
 	private String password;
-	
+
+//	@OneToOne(mappedBy ="user", cascade=CascadeType.ALL)
+//	@PrimaryKeyJoinColumn
+//	private UserInfo userInfo;
+
+	@OneToMany(mappedBy = "rolesUser", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@PrimaryKeyJoinColumn
+	private List<UserRole> userRoles = new ArrayList<UserRole>();
+
+//	@Column(name = "user_details_id", insertable=false, updatable=false)
+//	private int userDetailId;
+
 //	@OneToMany(fetch=FetchType.LAZY,
 //			   mappedBy="users",
 //			   cascade= {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
 //	private List<News> newsList;
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	private UserInfo userInfo;
-	
+
 //	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE, 
 //			CascadeType.DETACH,CascadeType.REFRESH })
 //	@JoinTable(name = "users_has_roles", 
@@ -62,8 +64,21 @@ public class User {
 //			inverseJoinColumns = @JoinColumn(name = "roles_id", referencedColumnName="id"))
 //	private List <UserRole> userRoleList;
 
-	public User (String login, String password) {
+	public User(String login, String password) {
 		this.login = login;
 		this.password = password;
 	}
+
+//	public void setUserInfo (UserInfo userInfo) {
+//		this.userInfo = userInfo;
+//		this.userInfo.setUser(this);
+//	}
+
+	public void setUserRoles(UserRole userRole) {
+        this.userRoles.add(userRole);
+        userRole.setRolesUser(this);
+    }
+
+	
+
 }

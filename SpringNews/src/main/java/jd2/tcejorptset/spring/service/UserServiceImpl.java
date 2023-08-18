@@ -29,8 +29,10 @@ public class UserServiceImpl implements UserService {
 	public String signIn(String login, String password) {
 
 		User user = userDAO.getUser(login);
+		System.out.println(user.getUserRoles()); // FLAG
 		if (user != null && encryptor.compare(password, user.getPassword())) {
-//			System.out.println(user.getUserRoleList().get(0).getRole()); // FLAG
+			System.out.println(user.getUserRoles().get(0).getRole()); // FLAG
+			System.out.println(user.getUserRoles().get(1).getRole()); // FLAG
 //			return user.getUserRoleList().get(0).getRole();
 			return "admin";
 		} else {
@@ -44,13 +46,13 @@ public class UserServiceImpl implements UserService {
 	public boolean registration(User user, UserInfo userInfo) {
 		try {
 			if (userDAO.getUser(user.getLogin())==null) {
-				List<UserRole> list = new LinkedList<UserRole>();
-				list.add(new UserRole("user"));
-				userInfo.setUserRegDate(new Timestamp(System.currentTimeMillis()));
+//				List<UserRole> list = new LinkedList<UserRole>();
+//				list.add(new UserRole("USER_ROLE"));
+//				list.add(new UserRole("ADMIN_ROLE"));
+//				userInfo.setUserRegDate(new Timestamp(System.currentTimeMillis()));
 				user.setPassword(encryptor.encrypt(user.getPassword()));
-//				userInfo.setUser(user);
-//				user.setUserRoleList(list);
-				user.setUserInfo(userInfo);
+				user.setUserRoles(new UserRole("USER_ROLE"));
+//				user.setUserInfo(userInfo);
 				return userDAO.saveUser(user);
 			} else {
 				return false;
