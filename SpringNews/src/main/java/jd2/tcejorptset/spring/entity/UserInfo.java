@@ -35,7 +35,7 @@ public class UserInfo implements Serializable{
 
 	@Id
 	@Column(name = "users_login")
-	private  String login;
+	private  String login; 
 	
 	@Column(name="firstname")
 	private String firstName;

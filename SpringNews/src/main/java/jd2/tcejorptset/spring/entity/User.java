@@ -53,7 +53,7 @@ public class User {
 //	private int userDetailId;
 
 //	@OneToMany(fetch=FetchType.LAZY,
-//			   mappedBy="users",
+//			   mappedBy="users", 
 //			   cascade= {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
 //	private List<News> newsList;
 
