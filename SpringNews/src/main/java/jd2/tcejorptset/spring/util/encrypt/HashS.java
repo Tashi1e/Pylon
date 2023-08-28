@@ -1,17 +1,19 @@
 package jd2.tcejorptset.spring.util.encrypt;
 
+import org.springframework.stereotype.Component;
+
 import com.lambdaworks.crypto.SCryptUtil;
 
+@Component ("SCrypt")
 public class HashS implements Encryptor {
 
 	@Override
-	public String encrypt(String to_encrypt) {
-		return SCryptUtil.scrypt(to_encrypt, 16, 16, 16);
+	public String encrypt(String toEncrypt) {
+		return SCryptUtil.scrypt(toEncrypt, 16, 16, 16);
 	}
-	
 
 	@Override
-	public boolean compare (String regular, String encrypted) {
+	public boolean compare(String regular, String encrypted) {
 		return SCryptUtil.check(regular, encrypted);
 	}
 

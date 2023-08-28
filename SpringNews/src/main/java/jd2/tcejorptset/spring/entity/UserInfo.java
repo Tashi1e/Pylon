@@ -52,10 +52,10 @@ public class UserInfo implements Serializable{
 	@Column(name="register_date")
 	private Timestamp userRegDate;
 	
-//	@OneToOne (fetch = FetchType.LAZY)
-//	@MapsId
-//	@JoinColumn(name = "users_login")
-//	private User user;
+	@OneToOne (fetch = FetchType.LAZY)
+	@MapsId
+	@JoinColumn(name = "users_login")
+	private User user;
 	
 //	@Id
 ////	@OneToOne(mappedBy="userInfo", cascade={CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})

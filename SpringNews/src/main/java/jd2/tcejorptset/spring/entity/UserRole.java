@@ -1,13 +1,12 @@
 package jd2.tcejorptset.spring.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.EqualsAndHashCode;
@@ -33,10 +32,10 @@ public class UserRole {
 	@Column(name = "authority")
 	private String role;
 
-	@ManyToOne (fetch = FetchType.LAZY)
+	@OneToOne (fetch = FetchType.LAZY)
 	@MapsId
 	@JoinColumn(name = "users_login")
-	private User rolesUser;
+	private User user;
 		
 	public UserRole (String role) {
 		this.role = role;

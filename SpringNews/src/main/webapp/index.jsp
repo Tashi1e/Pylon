@@ -5,7 +5,7 @@
 <html>
 <body>
 	<%
-	response.sendRedirect("login");
+	response.sendRedirect("autoSignIn");
 	%>
 
 	<%-- 	<c:if test="${not(sessionScope.firstEnter eq null)}"> --%>

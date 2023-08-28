@@ -1,12 +1,11 @@
 package jd2.tcejorptset.spring.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -36,8 +35,9 @@ public class UserToken {
 	@Column(name = "validator")
 	private String validator;
 
-//	@OneToOne(cascade = CascadeType.ALL)
-//	@JoinColumn(name = "users_id")
-//	private User user;
+	@OneToOne (fetch = FetchType.LAZY)
+	@MapsId
+	@JoinColumn(name = "users_login")
+	private User user;
 
 }

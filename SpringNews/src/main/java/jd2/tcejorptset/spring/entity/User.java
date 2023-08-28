@@ -1,16 +1,9 @@
 package jd2.tcejorptset.spring.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -41,14 +34,18 @@ public class User {
 	@Column(name = "password")
 	private String password;
 
-//	@OneToOne(mappedBy ="user", cascade=CascadeType.ALL)
-//	@PrimaryKeyJoinColumn
-//	private UserInfo userInfo;
-
-	@OneToMany(mappedBy = "rolesUser", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToOne(mappedBy ="user", cascade=CascadeType.ALL)
 	@PrimaryKeyJoinColumn
-	private List<UserRole> userRoles = new ArrayList<UserRole>();
+	private UserInfo userInfo;
+	
+	@OneToOne(mappedBy ="user", cascade=CascadeType.ALL)
+	@PrimaryKeyJoinColumn
+	private UserToken userToken;
 
+	@OneToOne(mappedBy ="user", cascade=CascadeType.ALL)
+	@PrimaryKeyJoinColumn
+	private UserRole userRole;
+	
 //	@Column(name = "user_details_id", insertable=false, updatable=false)
 //	private int userDetailId;
 
@@ -69,16 +66,19 @@ public class User {
 		this.password = password;
 	}
 
-//	public void setUserInfo (UserInfo userInfo) {
-//		this.userInfo = userInfo;
-//		this.userInfo.setUser(this);
-//	}
-
-	public void setUserRoles(UserRole userRole) {
-        this.userRoles.add(userRole);
-        userRole.setRolesUser(this);
-    }
-
+	public void setUserInfo (UserInfo userInfo) {
+		this.userInfo = userInfo;
+		this.userInfo.setUser(this);
+	}
 	
-
+	public void setUserToken (UserToken userToken) {
+		this.userToken = userToken;
+		this.userToken.setUser(this);
+	}
+	
+	public void setUserRole (UserRole userRole) {
+		this.userRole = userRole;
+		this.userRole.setUser(this);
+	}
+	
 }
