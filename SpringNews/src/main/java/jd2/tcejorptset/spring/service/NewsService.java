@@ -2,12 +2,11 @@ package jd2.tcejorptset.spring.service;
 
 import java.util.List;
 
-import jd2.tcejorptset.spring.entity.News;
+import jd2.tcejorptset.spring.bean.News;
 
 public interface NewsService {
 	
-  void save(News news);
-  void update(News news);
+  void saveOrUpdate(News news);
   void delete(int [] newsId);
   
   List<News> latestList(int count);

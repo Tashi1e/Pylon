@@ -2,39 +2,36 @@ package jd2.tcejorptset.spring.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import jd2.tcejorptset.spring.entity.News;
+
+import jd2.tcejorptset.spring.bean.News;
+import jd2.tcejorptset.spring.dao.NewsDAO;
 
 @Service
 public class NewsServiceImpl implements NewsService{
 	
-	
+	@Autowired
+	private NewsDAO newsDAO;
 
 	@Override
-	public void save(News news) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
-	public void update(News news) {
-		// TODO Auto-generated method stub
+	public void saveOrUpdate(News news) {
+		newsDAO.addOrUpdateNews(news);
 	}
 
 	@Override
 	public void delete(int[] newsId) {
-		// TODO Auto-generated method stub
+		newsDAO.deleteNews(newsId);
 	}
 
 	@Override
 	public List<News> latestList(int count) {
-		// TODO Auto-generated method stub
-		return null;
+		return newsDAO.getLatestsList(count);
 	}
 
 	@Override
 	public List<News> latestList() {
-		// TODO Auto-generated method stub
-		return null;
+		return latestList(5);
 	}
 
 	@Override

@@ -1,7 +1,7 @@
 package jd2.tcejorptset.spring.dao;
 
-import jd2.tcejorptset.spring.entity.User;
-import jd2.tcejorptset.spring.entity.UserToken;
+import jd2.tcejorptset.spring.bean.User;
+import jd2.tcejorptset.spring.bean.UserToken;
 
 public interface UserDAO {
 	

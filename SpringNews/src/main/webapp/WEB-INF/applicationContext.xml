@@ -48,7 +48,7 @@
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<property name="dataSource" ref="myDataSource" />
-		<property name="packagesToScan" value="jd2.tcejorptset.spring.entity" />
+		<property name="packagesToScan" value="jd2.tcejorptset.spring.bean" />
 		<property name="hibernateProperties">
 		   <props>
 		      <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
@@ -68,10 +68,6 @@
 	
 	<!-- Define object for storing current model attributes -->
 	<bean id="attributesContainer" class="java.util.HashMap" >
-	</bean>
-	
-	<!-- Define object for hashS encryptor -->
-	<bean id="scryptor" class="jd2.tcejorptset.spring.util.encrypt.HashS" >
 	</bean>
 	
 </beans>
