@@ -1,10 +1,9 @@
 package jd2.tcejorptset.spring.controller;
 
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -13,64 +12,67 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import jd2.tcejorptset.spring.service.ServiceException;
 import jd2.tcejorptset.spring.service.UserService;
-import jd2.tcejorptset.spring.util.encrypt.Encryptor;
-import jd2.tcejorptset.spring.dto.AuthorizedUserData;
-import jd2.tcejorptset.spring.dto.UserData;
-import jd2.tcejorptset.spring.entity.User;
+import jd2.tcejorptset.spring.bean.AuthorizedUserData;
+import jd2.tcejorptset.spring.bean.UserData;
+import jd2.tcejorptset.spring.bean.UserToken;
 
 @Controller
 public class LoginationOps {
 
 	@Autowired
 	private UserService service;
-	
-	@Autowired
-	@Qualifier("SCrypt")
-	Encryptor scryptor;
-	
+
 	@RequestMapping("/autoSignIn")
-	public String cookiesSignIn (@CookieValue(value = "selector") Cookie selector, 
-			@CookieValue(value = "validator") Cookie validator, Model model) {
+	public String cookiesSignIn(@CookieValue(value = ConstantName.SELECTOR, required = false) Cookie selector,
+			@CookieValue(value = ConstantName.VALIDATOR, required = false) Cookie validator, Model model) {
 		if (selector == null || validator == null) {
-			return "layouts/baseLayout";
+			return "redirect:/login";
 		}
 		AuthorizedUserData userData = service.tokenSignIn(selector.getValue(), validator.getValue());
 		if (userData != null) {
 			String role = userData.getUserRole();
 			String nickName = userData.getUserNick();
-			
+
 			model.addAttribute("role", role);
 			model.addAttribute("userNick", nickName);
 			model.addAttribute("presentation", "newsList");
+			return "redirect:/main";
+		} else {
 			return "redirect:/login";
-		}else {
-			return "layouts/baseLayout";
 		}
 	}
 
-	@RequestMapping("/login")
+	@RequestMapping(value = { "/login", "/main" })
 	public String showLoginPage(Model model) {
-		
-		model.addAttribute("loginData", new User());
 		model.addAttribute("userData", new UserData());
 		return "layouts/baseLayout";
 	}
 
 	@RequestMapping("/signin")
-	public String doSignIn(@ModelAttribute("loginData") User user, Model model) {
+	public String doSignIn(@ModelAttribute("userData") UserData userData, Model model, HttpServletResponse response) {
 
 //		System.out.printf("Login: %s\nPassword: %s\n", user.getLogin(), user.getPassword()); //FLAG
 
-		AuthorizedUserData userData = service.signIn(user.getLogin(), user.getPassword());
-		String role = userData.getUserRole();
-		String nickName = userData.getUserNick();
-		
-		model.addAttribute("role", role);
-		model.addAttribute("userNick", nickName);
-		model.addAttribute("presentation", "newsList");
-//					System.out.println(); //FLAG
+		AuthorizedUserData authorizedUserData = service.signIn(userData.getUser().getLogin(),
+				userData.getUser().getPassword());
+		String role = authorizedUserData.getUserRole();
+		String nickName = authorizedUserData.getUserNick();
 
-		return "redirect:/login";
+		if (role != null) {
+			model.addAttribute("role", role);
+			model.addAttribute("presentation", "newsList");
+
+//			if (userData.getRememberMeCheckBox() != null) {
+//				UserToken userToken = service.saveUserToken(userData.getUser().getLogin());
+//				response.addCookie(new Cookie(ConstantName.SELECTOR, userToken.getSelector()));
+//				response.addCookie(new Cookie(ConstantName.VALIDATOR, userToken.getValidator()));
+//			}
+		}
+		if (nickName != null) {
+			model.addAttribute("userNick", nickName);
+		}
+//					System.out.println(); //FLAG
+		return "redirect:/main";
 	}
 
 	@RequestMapping("/signout")

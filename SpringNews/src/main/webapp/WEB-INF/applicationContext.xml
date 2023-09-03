@@ -70,10 +70,6 @@
 	<bean id="attributesContainer" class="java.util.HashMap" >
 	</bean>
 	
-	<!-- Define object for hashS encryptor -->
-	<bean id="scryptor" class="jd2.tcejorptset.spring.util.encrypt.HashS" >
-	</bean>
-	
 </beans>
 
 

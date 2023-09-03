@@ -49,16 +49,16 @@
 	
 	<div class="header-grid-item-login" align="right">
 	<c:if test="${role eq 'guest' or role == null}">
-		<form:form action="signin" modelAttribute="loginData" id="box">
-			<input type="checkbox" name="remember_me" value="${remembButton}" id="checkbox" style="display: none" />
+		<form:form action="signin" modelAttribute="userData" id="box">
+			<form:checkbox path="rememberMeCheckBox" value="${remembButton}" id="checkbox" style="display: none" />
 			<input type="hidden" class = "button grey" value="${signinButton}" id="signin" />
 			<input type="button" class = "button transperent" value="${loginButton}" id="login" /> 
 			<span class="ph-container"> 
-				<form:input path="login" id="logName" class="text" placeholder=" " autocomplete="new-username" /> 
+				<form:input path="user.login" id="logName" class="text" placeholder=" " autocomplete="new-username" /> 
 				<label for="logName" class="logFormLabels" style="visibility: hidden">${loginLabel}</label>
 			</span> 
 			<span class="ph-container"> 
-			    <form:password path="password" id="password" class="text" placeholder=" " autocomplete="new-password" /> 
+			    <form:password path="user.password" id="password" class="text" placeholder=" " autocomplete="new-password" /> 
 				<label for="password" class="logFormLabels" style="visibility: hidden">${passLabel}</label>
 			</span> 
 			<input type="button" value="${signupButton}" class="button yellow" width="150" id="registration" />
