@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 import lombok.EqualsAndHashCode;
@@ -53,8 +54,9 @@ public class News {
 	@Column(name = "status")
 	private short status;
 
-//	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE, 
-//			CascadeType.DETACH, CascadeType.REFRESH })
-//	@JoinColumn(name = "users_login")
-//	private User User;
+	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE, 
+			CascadeType.DETACH, CascadeType.REFRESH })
+	@MapsId
+	@JoinColumn(name = "users_login")
+	private User User;
 }

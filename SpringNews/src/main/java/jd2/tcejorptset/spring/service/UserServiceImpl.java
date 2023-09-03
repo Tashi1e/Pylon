@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
 		AuthorizedUserData userData = new AuthorizedUserData();
 		if (user != null && bcryptor.compare(password, user.getPassword())) {
 			userData.setUserRole(user.getUserRole().getRole());
-			System.out.println("role = " + user.getUserRole().getRole()); //FLAG
+			System.out.println("role = " + user.getUserRole().getRole()); // FLAG
 		}
 		if (user.getUserInfo() != null) {
 			userData.setUserNick(user.getUserInfo().getNickName());
@@ -53,13 +53,15 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public AuthorizedUserData tokenSignIn(String selector, String validator) {
-
+		System.out.println("tokenSignIn -> selector + validator = " + selector + " + " + validator); //FLAG
 		UserToken innerToken = userDAO.getUserToken(selector);
-		System.out.println(innerToken == null);// FLAG
+		if (innerToken != null) { //FLAG
+		System.out.println("tokenSignIn -> innerToken -> selector + validator = " + innerToken.getSelector() + " + " + innerToken.getValidator()); //FLAG
+		} //FLAG
 		AuthorizedUserData userData = new AuthorizedUserData();
-		if (innerToken != null && scryptor.compare(selector, innerToken.getSelector())
-				&& scryptor.compare(validator, innerToken.getValidator())) {
-			System.out.println("role = " + innerToken.getUser().getUserRole().getRole());// FLAG
+		
+		if (innerToken != null) {
+			System.out.println("tokenSignIn -> role = " + innerToken.getUser().getUserRole().getRole());// FLAG
 			userData.setUserRole(innerToken.getUser().getUserRole().getRole());
 		}
 		if (innerToken != null && innerToken.getUser().getUserInfo() != null) {
@@ -97,19 +99,19 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
-	public Map <String, String> saveUserToken(String login) {
+	public UserToken saveUserToken(String login) {
 		User user = userDAO.getUser(login);
-		String selector = RandomStringUtils.randomAlphabetic(16);
-		String validator = RandomStringUtils.randomAlphabetic(16);
+		String selector = scryptor.encrypt(RandomStringUtils.randomAlphabetic(16));
+		String validator = scryptor.encrypt(RandomStringUtils.randomAlphabetic(16));
 		UserToken userToken = user.getUserToken();
-		userToken.setSelector(scryptor.encrypt(selector));
-		userToken.setValidator(scryptor.encrypt(validator));
+		if (userToken==null) {
+			userToken = new UserToken();
+		}
+		userToken.setSelector(selector);
+		userToken.setValidator(validator);
 		user.setUserToken(userToken);
 		userDAO.saveUser(user);
-		 Map <String, String> token = new HashMap<>();
-		 token.put("selector", selector);
-		 token.put("validator", validator);
-		return token;
+		return userToken;
 	}
 
 }

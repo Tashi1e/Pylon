@@ -40,10 +40,9 @@
 			</a>
 <%-- 		</form> --%>
 	</div>
-	 
 	<c:if test="${not(role eq 'guest') and role != null}">
 	<div class="header-grid-item" align="right" style="padding-top: 15px;">
-	${userInfo.nickName}
+	${userNick}
 	</div>
 	</c:if>
 	

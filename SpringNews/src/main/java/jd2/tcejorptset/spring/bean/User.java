@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -32,28 +33,27 @@ import lombok.ToString;
 public class User {
 
 	@Id
-	@Column(name = "login")
+	@Column(name = "login") 
 	private String login;
 
 	@Column(name = "password")
 	private String password;
 
-	@OneToOne(mappedBy ="user", cascade=CascadeType.ALL)
+	@OneToOne(mappedBy ="user", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
 	@PrimaryKeyJoinColumn
 	private UserInfo userInfo;
 	
-	@OneToOne(mappedBy ="user", cascade=CascadeType.ALL)
+	@OneToOne(mappedBy ="user", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
 	@PrimaryKeyJoinColumn
 	private UserToken userToken;
 
-	@OneToOne(mappedBy ="user", cascade=CascadeType.ALL)
+	@OneToOne(mappedBy ="user", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
 	@PrimaryKeyJoinColumn
 	private UserRole userRole;
 
-//	@OneToMany(fetch=FetchType.LAZY,
-//			   mappedBy="user", 
-//			   cascade= {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-//	private List<News> newsList;
+	@OneToMany(fetch=FetchType.LAZY,
+			   cascade= {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+	private List<News> newsList;
 
 //	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE, 
 //			CascadeType.DETACH,CascadeType.REFRESH })

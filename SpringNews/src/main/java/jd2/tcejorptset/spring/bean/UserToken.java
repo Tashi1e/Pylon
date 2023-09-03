@@ -23,6 +23,7 @@ import lombok.ToString;
 @EqualsAndHashCode
 @NoArgsConstructor
 
+@Component
 @Entity
 @Table(name = "user_token")
 public class UserToken {
