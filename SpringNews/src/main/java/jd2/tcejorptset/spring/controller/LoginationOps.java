@@ -73,7 +73,7 @@ public class LoginationOps {
 			}
 		}
 		if (nickName != null) {
-			model.addAttribute("userNick", nickName);
+			model.addAttribute("userNick", nickName); 
 		}
 //					System.out.println(); //FLAG
 		return "redirect:/main";

@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
 	UserDAO userDAO;
 
 	@Autowired
-	@Qualifier("BCrypt")
+	@Qualifier("BCrypt") 
 	Encryptor bcryptor;
 
 	@Autowired
@@ -106,7 +106,7 @@ public class UserServiceImpl implements UserService {
 		userToken.setValidator(scryptor.encrypt(validator));
 		user.setUserToken(userToken);
 		userDAO.saveUser(user);
-		 Map <String, String> token = new HashMap<>();
+		 Map <String, String> token = new HashMap<>(); 
 		 token.put("selector", selector);
 		 token.put("validator", validator);
 		return token;

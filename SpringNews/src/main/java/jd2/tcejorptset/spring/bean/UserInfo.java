@@ -44,8 +44,7 @@ public class UserInfo implements Serializable{
 	private String lastName;
 	
 	@Column(name="nickname")
-	private String nickName;
-	
+	private String nickName; 
 	@Column(name="email")
 	private String email;
 	
