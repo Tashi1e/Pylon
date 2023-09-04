@@ -2,6 +2,8 @@ package jd2.tcejorptset.spring.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,16 +17,19 @@ public class NewsServiceImpl implements NewsService{
 	private NewsDAO newsDAO;
 
 	@Override
+	@Transactional
 	public void saveOrUpdate(News news) {
 		newsDAO.addOrUpdateNews(news);
 	}
 
 	@Override
+	@Transactional
 	public void delete(int[] newsId) {
 		newsDAO.deleteNews(newsId);
 	}
 
 	@Override
+	@Transactional
 	public List<News> latestList(int count) {
 		return newsDAO.getLatestsList(count);
 	}
@@ -35,12 +40,14 @@ public class NewsServiceImpl implements NewsService{
 	}
 
 	@Override
+	@Transactional
 	public List<News> find(String keyWord) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
+	@Transactional
 	public News findById(int id) {
 		// TODO Auto-generated method stub
 		return null;

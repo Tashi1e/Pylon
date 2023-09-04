@@ -1,6 +1,7 @@
 <%@page import="java.util.List"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <fmt:setLocale value="${sessionScope.locale}" />
 
@@ -10,19 +11,19 @@
 </div>
 
 <form action="" method="post">
-	<c:forEach var="news" items="${requestScope.news}">
+	<c:forEach var="news" items="${newsList}">
 		<div class="single-news-wrapper">
 			<div class="single-news-header-wrapper">
 				<div class="news-title">
-				<a href="controller?command=go_to_view_news&id=${news.id}" style="color:black; text-decoration:none; font-size: 20px; font-weight: bold">
+				<a href="newsPage?news=${news}" style="color:black; text-decoration:none; font-size: 20px; font-weight: bold">
 					<c:out value="${news.title}" />
 				</a>
 				</div>
 				<div class="news-date">
 <%-- 					<c:out value="${news.date}" /> --%>
-						<fmt:timeZone value="${sessionScope.locale}">
+<%-- 						<fmt:timeZone value="${sessionScope.locale}"> --%>
 						<fmt:formatDate type = "date" dateStyle = "short" value = "${news.date}"/>
-						</fmt:timeZone>
+<%-- 						</fmt:timeZone> --%>
 				</div>
 
 				<div class="news-content">
@@ -30,8 +31,8 @@
 				</div>
 				<div class="news-link-to-wrapper">
 					<div class="link-position">
-						<c:if test="${sessionScope.role eq 'admin'}">
-						      <a href="controller?command=go_to_add_edit_news_page&id=${news.id}&presentation=editNews" style="color:black; text-decoration:none">
+						<c:if test="${role eq 'ADMIN_ROLE'}">
+						      <a href="editNewsPage?news=${news}" style="color:black; text-decoration:none">
 						      	<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="grey" class="bi bi-pencil-square" viewBox="0 0 16 16">
   								<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 
   								9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
@@ -39,7 +40,7 @@
   								1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
 								</svg>
 						      </a> 
-   					         <input type="checkbox" name="id" value="${news.id}" id="chbx${news.id}" form="delete_news_form" style="display: none"/>
+   					         <form:checkbox path="${news.id}" id="chbx${news.id}" form="delete_news_form" style="display: none"/>
    					         <label for="chbx${news.id}" style="position: relative; display: inline-block;">
 
    					         <span>
@@ -78,7 +79,7 @@
 	</c:forEach>
 
 	<div class="no-news">
-		<c:if test="${requestScope.news eq null}">
+		<c:if test="${newsList eq null}">
         No news.
 	</c:if>
 	</div>

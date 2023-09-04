@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
 	UserDAO userDAO;
 
 	@Autowired
-	@Qualifier("BCrypt")
+	@Qualifier("BCrypt") 
 	Encryptor bcryptor;
 
 	@Autowired
@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
 			System.out.println("role = " + user.getUserRole().getRole()); // FLAG
 		}
 		if (user.getUserInfo() != null) {
-			userData.setUserNick(user.getUserInfo().getNickName());
+			userData.setUserNick(user.getUserInfo().getNickName()); 
 		}
 		return userData;
 	}
