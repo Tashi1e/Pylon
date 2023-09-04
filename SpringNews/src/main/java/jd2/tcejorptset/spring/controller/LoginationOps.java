@@ -17,7 +17,7 @@ import jd2.tcejorptset.spring.service.ServiceException;
 import jd2.tcejorptset.spring.service.UserService;
 import jd2.tcejorptset.spring.bean.AuthorizedUserData;
 import jd2.tcejorptset.spring.bean.UserData;
-import jd2.tcejorptset.spring.bean.UserToken;
+import jd2.tcejorptset.spring.bean.UserToken; 
 
 @Controller
 public class LoginationOps {

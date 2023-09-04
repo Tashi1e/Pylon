@@ -72,7 +72,7 @@ public class User {
 		this.userInfo.setUser(this);
 	}
 	
-	public void setUserToken (UserToken userToken) {
+	public void setUserToken (UserToken userToken) { 
 		this.userToken = userToken;
 		this.userToken.setUser(this);
 	}
