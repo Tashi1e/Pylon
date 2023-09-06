@@ -65,7 +65,7 @@ public class LoginationOps {
 		return "layouts/baseLayout";
 	}
 
-	@RequestMapping("/signin")
+	@RequestMapping("/signin") 
 	public String doSignIn(@ModelAttribute("userData") UserData userData, Model model, HttpServletResponse response) {
 
 //		System.out.printf("Login: %s\nPassword: %s\n", user.getLogin(), user.getPassword()); //FLAG
