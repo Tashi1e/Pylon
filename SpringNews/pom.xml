@@ -26,7 +26,7 @@
 			<version>4.3.9.RELEASE</version>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework</groupId>
+			<groupId>org.springframework</groupId> 
 			<artifactId>spring-tx</artifactId>
 			<version>5.0.6.RELEASE</version>
 		</dependency>

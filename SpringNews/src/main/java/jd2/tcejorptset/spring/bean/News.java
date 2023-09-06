@@ -54,9 +54,9 @@ public class News {
 	@Column(name = "status")
 	private short status;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE, 
-			CascadeType.DETACH, CascadeType.REFRESH })
-	@MapsId
-	@JoinColumn(name = "users_login")
-	private User User;
+//	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE, 
+//			CascadeType.DETACH, CascadeType.REFRESH })
+//	@MapsId
+//	@JoinColumn(name = "users_login")
+//	private User User;
 }

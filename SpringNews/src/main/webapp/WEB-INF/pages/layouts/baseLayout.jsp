@@ -56,10 +56,10 @@
 		background-image: url(images/newspaper_design_cut1.jpg)">
 
 <%-- 				<c:if test="${sessionScope.user_active == false}"> --%>
-					<c:import url="/WEB-INF/pages/tiles/guestInfo.jsp" />
+<%-- 					<c:import url="/WEB-INF/pages/tiles/guestInfo.jsp" /> --%>
 <%-- 				</c:if> --%>
 <%-- 				<c:if test="${sessionScope.user_active == true}"> --%>
-<%-- 					<c:import url="/WEB-INF/pages/tiles/body.jsp" /> --%>
+					<c:import url="/WEB-INF/pages/tiles/body.jsp" />
 <%-- 				</c:if> --%>
 
 

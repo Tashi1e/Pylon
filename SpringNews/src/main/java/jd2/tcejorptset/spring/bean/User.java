@@ -51,9 +51,9 @@ public class User {
 	@PrimaryKeyJoinColumn
 	private UserRole userRole;
 
-	@OneToMany(fetch=FetchType.LAZY,
-			   cascade= {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-	private List<News> newsList;
+//	@OneToMany(fetch=FetchType.LAZY,
+//			   cascade= {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+//	private List<News> newsList;
 
 //	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE, 
 //			CascadeType.DETACH,CascadeType.REFRESH })

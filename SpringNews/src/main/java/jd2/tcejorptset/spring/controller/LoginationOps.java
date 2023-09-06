@@ -34,7 +34,7 @@ public class LoginationOps {
 //		System.out.println("autoSignIn -> selector + validator = " + selector.getValue() + " + " + validator.getValue()); //FLAG
 		
 		if (selector == null || validator == null) {
-			return "redirect:/guest/mainPage";
+			return "redirect:/guest/main";
 		}
 		AuthorizedUserData userData = service.tokenSignIn(selector.getValue(), validator.getValue());
 		if (userData != null) {
@@ -51,21 +51,21 @@ public class LoginationOps {
 //			model.addAttribute("role", role);
 //			model.addAttribute("userNick", nickName);
 //			model.addAttribute("presentation", "newsList");
-			return "redirect:/"+role+"/newsListPage";
+			return "redirect:/"+role+"/newsList";
 		} else {
-			return "redirect:/guest/mainPage";
+			return "redirect:/guest/main";
 		}
 	}
 
-	@RequestMapping("/guest/*")
-	public String showLoginPage(Model model) {
-		
-		model.addAllAttributes(attributesContainer);
-		model.addAttribute("userData", new UserData());
-		return "layouts/baseLayout";
-	}
+//	@RequestMapping("/guest/*")
+//	public String showLoginPage(Model model) {
+//		System.out.println("showLoginPage"); //FLAG
+//		model.addAllAttributes(attributesContainer);
+//		model.addAttribute("userData", new UserData());
+//		return "layouts/baseLayout";
+//	}
 
-	@RequestMapping("/signin")
+	@RequestMapping("/signin") 
 	public String doSignIn(@ModelAttribute("userData") UserData userData, Model model, HttpServletResponse response) {
 
 //		System.out.printf("Login: %s\nPassword: %s\n", user.getLogin(), user.getPassword()); //FLAG

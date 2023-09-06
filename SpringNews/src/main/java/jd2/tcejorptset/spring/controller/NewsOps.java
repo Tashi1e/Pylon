@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import jd2.tcejorptset.spring.service.NewsService;
 import jd2.tcejorptset.spring.bean.News;
+import jd2.tcejorptset.spring.bean.UserData;
 
 @Controller
 public class NewsOps {
@@ -22,21 +23,48 @@ public class NewsOps {
 	private Map<String, Object> attributesContainer;
 
 
-	@RequestMapping(value = { "*/mainPage", "*/newsListPage"})
+	@RequestMapping("/guest/main")
+	public String guestInfo(Model model) {
+//		List <News> newsList = newsService.latestList();
+//		model.addAttribute("newsList", newsList);
+		model.addAttribute("userData", new UserData());
+		return "layouts/baseLayout";
+	}
+	
+	@RequestMapping("*/newsList")
 	public String latestNewsList(Model model) {
+		model.addAttribute("userData", new UserData());
 //		List <News> newsList = newsService.latestList();
 //		model.addAttribute("newsList", newsList);
 		return "layouts/baseLayout";
 	}
 
-	@RequestMapping("*/newsPage")
+	@RequestMapping("*/news")
 	public String newsPage(@ModelAttribute("newsData") News news, Model model) {
 		model.addAttribute("news", news);
 		return "layouts/baseLayout";
 	}
 
-	@RequestMapping("admin/editNewsPage")
-	public String doSignOut() {
+	@RequestMapping("admin/editNews")
+	public String editNewsPage() {
+		attributesContainer.clear();
+		return "layouts/baseLayout";
+	}
+	
+	@RequestMapping("/saveNews")
+	public String saveNews() {
+		attributesContainer.clear();
+		return "layouts/baseLayout";
+	}
+	
+	@RequestMapping("/deleteNews")
+	public String deleteNews() {
+		attributesContainer.clear();
+		return "layouts/baseLayout";
+	}
+	
+	@RequestMapping("/fetchNews")
+	public String fetchNews() {
 		attributesContainer.clear();
 		return "layouts/baseLayout";
 	}
