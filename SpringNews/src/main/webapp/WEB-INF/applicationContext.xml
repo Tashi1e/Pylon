@@ -70,6 +70,12 @@
 	<bean id="attributesContainer" class="java.util.HashMap" >
 	</bean>
 	
+	<bean id="userRole" class="java.lang.String" >
+	</bean>
+	
+	<bean id="userNick" class="java.lang.String" >
+	</bean>
+	
 </beans>
 
 

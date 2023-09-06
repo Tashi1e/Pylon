@@ -25,10 +25,12 @@ public class UserDAOImpl implements UserDAO {
 	}
 	
 	@Override
-	public UserToken getUserToken(String selector) {
+	public UserToken getUserToken(String selector, String validator) {
 		Session currentSession = sessionFactory.getCurrentSession();
-		Query<UserToken> theQuery = currentSession.createQuery("from UserToken where selector = :userSelector", UserToken.class);
+		Query<UserToken> theQuery = currentSession.createQuery
+				("from UserToken where selector = :userSelector and validator = :userValidator", UserToken.class);
 		theQuery.setParameter("userSelector", selector);
+		theQuery.setParameter("userValidator", validator);
 		UserToken token = theQuery.uniqueResult();
 		if (token != null) { //FLAG
 		System.out.println("getUserToken -> selector + validator = " + token.getSelector() + " + " + token.getValidator()); //FLAG

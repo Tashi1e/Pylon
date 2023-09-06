@@ -6,7 +6,7 @@ import jd2.tcejorptset.spring.bean.UserToken;
 public interface UserDAO {
 	
 	User getUser (String login);
-	UserToken getUserToken(String selector);
+	UserToken getUserToken(String selector, String validator);
 	boolean emailExists(String login);
 	boolean saveUser (User user);
 	boolean addOrUpdateToken (UserToken userToken);

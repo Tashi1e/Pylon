@@ -40,24 +40,24 @@
 			</a>
 <%-- 		</form> --%>
 	</div>
-	<c:if test="${not(role eq 'guest') and role != null}">
+	<c:if test="${not(userRole eq 'guest') and userRole != null}">
 	<div class="header-grid-item" align="right" style="padding-top: 15px;">
 	${userNick}
 	</div>
 	</c:if>
 	
 	<div class="header-grid-item-login" align="right">
-	<c:if test="${role eq 'guest' or role == null}">
+	<c:if test="${userRole eq 'guest' or userRole eq''}">
 		<form:form action="signin" modelAttribute="userData" id="box">
 			<form:checkbox path="rememberMeCheckBox" value="${remembButton}" id="checkbox" style="display: none" />
 			<input type="hidden" class = "button grey" value="${signinButton}" id="signin" />
 			<input type="button" class = "button transperent" value="${loginButton}" id="login" /> 
 			<span class="ph-container"> 
-				<form:input path="user.login" id="logName" class="text loginForm" placeholder=" " autocomplete="new-username" /> 
+				<form:input path="user.login" id="logName" class="text" placeholder=" " autocomplete="new-username" /> 
 				<label for="logName" class="logFormLabels" style="visibility: hidden">${loginLabel}</label>
 			</span> 
 			<span class="ph-container"> 
-			    <form:password path="user.password" id="password" class="text loginForm" placeholder=" " autocomplete="new-password" /> 
+			    <form:password path="user.password" id="password" class="text" placeholder=" " autocomplete="new-password" /> 
 				<label for="password" class="logFormLabels" style="visibility: hidden">${passLabel}</label>
 			</span> 
 			<input type="button" value="${signupButton}" class="button yellow" width="150" id="registration" />
@@ -65,7 +65,7 @@
 				</form:form>
 		</c:if>
 		
-	<c:if test="${not(role eq 'guest') and role != null}">
+	<c:if test="${not(userRole eq 'guest') and userRole != null and not(userRole eq '')}">
 		<form:form action="signout">
 			<input type="submit" class="button transperent" value="${signoutButton}" id="signOut" /> 
 		</form:form>

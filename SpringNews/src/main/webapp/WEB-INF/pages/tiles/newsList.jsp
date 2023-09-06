@@ -3,7 +3,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
-<fmt:setLocale value="${sessionScope.locale}" />
+<%-- <fmt:setLocale value="${sessionScope.locale}" /> --%>
 
 <div class="body-title">
 <!-- 	<a href="">News >> </a>  -->
@@ -15,9 +15,14 @@
 		<div class="single-news-wrapper">
 			<div class="single-news-header-wrapper">
 				<div class="news-title">
+				<c:if test="${not(role eq 'guest') and role != null}">
 				<a href="newsPage?news=${news}" style="color:black; text-decoration:none; font-size: 20px; font-weight: bold">
 					<c:out value="${news.title}" />
 				</a>
+				</c:if>
+				<c:if test="${role == null or role eq 'guest'}">
+					<h3><c:out value="${news.title}" /></h3>
+				</c:if>
 				</div>
 				<div class="news-date">
 <%-- 					<c:out value="${news.date}" /> --%>
@@ -31,7 +36,7 @@
 				</div>
 				<div class="news-link-to-wrapper">
 					<div class="link-position">
-						<c:if test="${role eq 'ADMIN_ROLE'}">
+						<c:if test="${role eq 'admin'}">
 						      <a href="editNewsPage?news=${news}" style="color:black; text-decoration:none">
 						      	<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="grey" class="bi bi-pencil-square" viewBox="0 0 16 16">
   								<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 

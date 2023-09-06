@@ -1,8 +1,6 @@
 package jd2.tcejorptset.spring.service;
 
 import java.sql.Timestamp;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.transaction.Transactional;
 
@@ -40,12 +38,11 @@ public class UserServiceImpl implements UserService {
 
 		User user = userDAO.getUser(login);
 		AuthorizedUserData userData = new AuthorizedUserData();
+		userData.setUserRole("guest");
 		if (user != null && bcryptor.compare(password, user.getPassword())) {
 			userData.setUserRole(user.getUserRole().getRole());
-			System.out.println("role = " + user.getUserRole().getRole()); // FLAG
-		}
-		if (user.getUserInfo() != null) {
-			userData.setUserNick(user.getUserInfo().getNickName()); 
+			userData.setUserNick(user.getUserInfo().getNickName());
+//			System.out.println("Service -> signIn -> role = " + user.getUserRole().getRole()); // FLAG
 		}
 		return userData;
 	}
@@ -53,18 +50,17 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public AuthorizedUserData tokenSignIn(String selector, String validator) {
-		System.out.println("tokenSignIn -> selector + validator = " + selector + " + " + validator); //FLAG
-		UserToken innerToken = userDAO.getUserToken(selector);
-		if (innerToken != null) { //FLAG
-		System.out.println("tokenSignIn -> innerToken -> selector + validator = " + innerToken.getSelector() + " + " + innerToken.getValidator()); //FLAG
-		} //FLAG
+//		System.out.println("tokenSignIn -> selector + validator = " + selector + " + " + validator); //FLAG
+		UserToken innerToken = userDAO.getUserToken(selector, validator);
+//		if (innerToken != null) { //FLAG
+//		System.out.println("tokenSignIn -> innerToken -> selector + validator = " + innerToken.getSelector() + " + " + innerToken.getValidator()); //FLAG
+//		} //FLAG
 		AuthorizedUserData userData = new AuthorizedUserData();
+		userData.setUserRole("guest");
 		
 		if (innerToken != null) {
 			System.out.println("tokenSignIn -> role = " + innerToken.getUser().getUserRole().getRole());// FLAG
 			userData.setUserRole(innerToken.getUser().getUserRole().getRole());
-		}
-		if (innerToken != null && innerToken.getUser().getUserInfo() != null) {
 			userData.setUserNick(innerToken.getUser().getUserInfo().getNickName());
 		}
 		return userData;
