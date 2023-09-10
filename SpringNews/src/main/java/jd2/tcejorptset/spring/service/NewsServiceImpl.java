@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jd2.tcejorptset.spring.bean.News;
+import jd2.tcejorptset.spring.bean.UserInfo;
 import jd2.tcejorptset.spring.dao.NewsDAO;
 
 @Service
@@ -31,6 +32,8 @@ public class NewsServiceImpl implements NewsService{
 	@Override
 	@Transactional
 	public List<News> latestList(int count) {
+		UserInfo temp = newsDAO.getLatestsList(count).get(0).getUserInfo();
+		System.out.println(temp.getFirstName() + " " + temp.getLastName()); //FLAG
 		return newsDAO.getLatestsList(count);
 	}
 

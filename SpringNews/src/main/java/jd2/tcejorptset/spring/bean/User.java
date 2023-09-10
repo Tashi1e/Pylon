@@ -1,13 +1,15 @@
 package jd2.tcejorptset.spring.bean;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
@@ -51,10 +53,10 @@ public class User {
 	@PrimaryKeyJoinColumn
 	private UserRole userRole;
 
-//	@OneToMany(fetch=FetchType.LAZY,
+//	@OneToMany(mappedBy ="user", fetch=FetchType.LAZY,
 //			   cascade= {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-//	private List<News> newsList;
-
+//	private Set<News> newsList = new HashSet<>();
+	
 //	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE, 
 //			CascadeType.DETACH,CascadeType.REFRESH })
 //	@JoinTable(name = "users_has_roles", 
@@ -81,5 +83,13 @@ public class User {
 		this.userRole = userRole;
 		this.userRole.setUser(this);
 	}
+	
+//	public void addNews(News news) {
+//		if (newsList == null) {
+//			newsList = new ArrayList<>();
+//		}
+//		newsList.add(news);
+//		news.setUser(this);
+//	}
 	
 }

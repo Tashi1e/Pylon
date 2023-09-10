@@ -1,7 +1,7 @@
 package jd2.tcejorptset.spring.bean;
 
-import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -29,10 +30,8 @@ import lombok.EqualsAndHashCode;
 @Component
 @Entity
 @Table(name="user_details")
-public class UserInfo implements Serializable{
+public class UserInfo {
 	
-	private static final long serialVersionUID = -7073204465384835038L;
-
 	@Id
 	@Column(name = "users_login")
 	private  String login; 
@@ -56,5 +55,8 @@ public class UserInfo implements Serializable{
 	@JoinColumn(name = "users_login")
 	private User user;
 	
+	@OneToMany (fetch = FetchType.LAZY)
+	@JoinColumn (name = "authors_email")
+	private List <News> newsList;
 }
 

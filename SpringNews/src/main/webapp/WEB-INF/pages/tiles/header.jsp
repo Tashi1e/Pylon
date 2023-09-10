@@ -47,7 +47,7 @@
 	</c:if>
 	
 	<div class="header-grid-item-login" align="right">
-	<c:if test="${userRole eq 'guest' or userRole eq''}">
+	<c:if test="${userRole eq 'guest' or userRole eq'' or userRole == null}">
 		<form:form action="signin" modelAttribute="userData" id="box">
 			<form:checkbox path="rememberMeCheckBox" value="${remembButton}" id="checkbox" style="display: none" />
 			<input type="hidden" class = "button grey" value="${signinButton}" id="signin" />
