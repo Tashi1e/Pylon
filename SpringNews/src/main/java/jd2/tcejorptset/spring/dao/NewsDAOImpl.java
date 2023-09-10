@@ -3,6 +3,8 @@ package jd2.tcejorptset.spring.dao;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -26,9 +28,10 @@ public class NewsDAOImpl implements NewsDAO {
 	}
 
 	@Override
+	@Transactional
 	public List<News> getLatestsList(int count) {
 		Session currentSession = sessionFactory.getCurrentSession();
-		Query <News> theQuery = currentSession.createQuery("from News order by date desc", News.class);
+		Query <News> theQuery = currentSession.createQuery("from News", News.class);
 		theQuery.setFirstResult(0);
 		theQuery.setMaxResults(count);
 		return theQuery.getResultList();

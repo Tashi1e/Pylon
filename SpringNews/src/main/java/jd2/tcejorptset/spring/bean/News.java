@@ -35,7 +35,7 @@ public class News {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
-
+	
 	@Column(name = "title")
 	private String title;
 
@@ -54,9 +54,8 @@ public class News {
 	@Column(name = "status")
 	private short status;
 
-//	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE, 
-//			CascadeType.DETACH, CascadeType.REFRESH })
-//	@MapsId
-//	@JoinColumn(name = "users_login")
-//	private User User;
+	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE, 
+			CascadeType.DETACH, CascadeType.REFRESH })
+	@JoinColumn(name = "users_login", nullable = false)
+	private User User;
 }
