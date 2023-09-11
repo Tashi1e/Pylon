@@ -85,7 +85,7 @@ public class UserServiceImpl implements UserService {
 //			}
 		userInfo.setUserRegDate(new Timestamp(System.currentTimeMillis()));
 		user.setPassword(bcryptor.encrypt(user.getPassword()));
-		user.setUserRole(new UserRole("USER_ROLE"));
+		user.setUserRole(new UserRole("user"));
 		user.setUserInfo(userInfo);
 		return userDAO.saveUser(user);
 //		} catch (Exception e) {

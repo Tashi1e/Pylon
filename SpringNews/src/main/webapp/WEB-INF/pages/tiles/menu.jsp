@@ -83,7 +83,7 @@ background-color: gold;
 		<li><form action="controller" method="post">
 		<a href="controller?command=go_to_news_list">${news_list_link}</a>
 		</form></li>
-		<c:if test="${sessionScope.role eq 'admin'}">
+		<c:if test="${userRole eq 'admin'}">
 			<li><a href="controller?command=go_to_add_edit_news_page&presentation=addNews">${add_news_link}</a></li>
 			<li><form action="controller" method="post" id="delete_news_form">
 			<input type="hidden" name="command" value="do_delete_news" />
@@ -91,9 +91,9 @@ background-color: gold;
 			</form></li>
 		</c:if>
 	</ul>
-	<c:if test="${not(requestScope.presentation eq 'newsList')}">
+	<c:if test="${not(presentation eq 'newsList')}">
 	<ul class="menu_list" style="list-style: none; text-align: left; padding-left: 0px"><li>
-	<a href="controller?command=go_to_news_list" style="position: absolute; bottom: 20px; left: 35px">&#8678  ${back_link}</a>
+	<a href="main" style="position: absolute; bottom: 20px; left: 35px">&#8678  ${back_link}</a>
 	</li></ul>
 <%-- 	< class="link_button" value="&#8678  ${back_link}" style="position: absolute; bottom: 20px; left: 35px" onclick="history.back()" /> --%>
 	</c:if>

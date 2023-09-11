@@ -47,7 +47,7 @@
 	</table>
 </div>
 
-<c:if test="${sessionScope.role eq 'admin' || sessionScope.role eq 'editor'}">
+<c:if test="${userRole eq 'admin' || userRole eq 'editor'}">
 	<div class="view-news-grid-container">
 		<form action="controller" method="get">
 			<input type="hidden" name="command" value="go_to_add_edit_news_page" /> 

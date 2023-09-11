@@ -1,5 +1,6 @@
 package jd2.tcejorptset.spring.bean;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -30,8 +31,10 @@ import lombok.EqualsAndHashCode;
 @Component
 @Entity
 @Table(name="user_details")
-public class UserInfo {
+public class UserInfo implements Serializable{
 	
+	private static final long serialVersionUID = 9083880725683070107L;
+
 	@Id
 	@Column(name = "users_login")
 	private  String login; 
@@ -47,7 +50,7 @@ public class UserInfo {
 	@Column(name="email")
 	private String email;
 	
-	@Column(name="register_date")
+	@Column(name="register_date") 
 	private Timestamp userRegDate;
 	
 	@OneToOne (fetch = FetchType.LAZY)

@@ -41,15 +41,19 @@ public class NewsController {
 	}
 
 	@RequestMapping(value = {"/user/news", "/admin/news"})
-	public String newsPage(@ModelAttribute("newsData") News news, @ModelAttribute("userRole") String role, 
-			@ModelAttribute("userNick") String nick, Model model, RedirectAttributes attributes) {
+	public String newsPage(@ModelAttribute("newsId") int newsId, @ModelAttribute("authData") AuthorizedUserData authData, Model model) {
+		News news = newsService.findById(newsId);
+		String author = news.getUserInfo().getFirstName() + " " + news.getUserInfo().getLastName(); 
 		model.addAttribute("news", news);
-		attributes.addFlashAttribute("userRole", role);
-		attributes.addFlashAttribute("userNick", nick);
+		model.addAttribute("author", author);
+		model.addAttribute("userRole", authData.getUserRole());
+		model.addAttribute("userNick", authData.getUserNick());
+		model.addAttribute("presentation", "viewNews");
+		model.addAttribute("userData", new UserData());
 		return "layouts/baseLayout";
 	}
 	
-	@RequestMapping(value = {"/user/fetchNews", "/admin/fetchNews"})
+	@RequestMapping(value = {"/user/findNews", "/admin/findNews"})
 	public String fetchNews(Model model) {
 //		model.addAttribute("role", userRole);
 		return "layouts/baseLayout";

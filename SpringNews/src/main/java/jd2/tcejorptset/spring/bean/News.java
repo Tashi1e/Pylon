@@ -16,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,11 +30,12 @@ import lombok.ToString;
 @EqualsAndHashCode
 @NoArgsConstructor
 
+@Component
 @Entity
 @Table(name = "news")
-public class News implements Serializable {
+public class News implements Serializable{
 
-	private static final long serialVersionUID = -1111870449770483757L;
+	private static final long serialVersionUID = 5998288721757839147L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

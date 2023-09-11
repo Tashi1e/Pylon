@@ -52,7 +52,7 @@ public class User {
 	@OneToOne(mappedBy ="user", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
 	@PrimaryKeyJoinColumn
 	private UserRole userRole;
-
+ 
 //	@OneToMany(mappedBy ="user", fetch=FetchType.LAZY,
 //			   cascade= {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
 //	private Set<News> newsList = new HashSet<>();

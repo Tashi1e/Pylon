@@ -41,26 +41,20 @@
 		<div class="base-layout-wrapper">
 			<div class="menu">
 
-<%-- 				<c:if test="${sessionScope.user_active == false}"> --%>
-<!-- 				<br/> -->
-<!-- 				<h4 style = "padding-left: 15px"> -->
+				<c:if test="${userRole eq 'guest' or userRole == null}">
+				<br/>
+				<h4 style = "padding-left: 15px">
 				    ${welcome_guest}
-<!-- 				    </h4>  -->
-<%-- 				</c:if> --%>
-<%-- 				<c:if test="${sessionScope.user_active == true}"> --%>
-<%-- 					<c:import url="/WEB-INF/pages/tiles/menu.jsp" /> --%>
-<%-- 				</c:if> --%>
+				    </h4> 
+				</c:if>
+				<c:if test="${not(userRole eq 'guest') and userRole != null}">
+					<c:import url="/WEB-INF/pages/tiles/menu.jsp" />
+				</c:if>
 		</div>
 
-		<div class="content" style="
-		background-image: url(images/newspaper_design_cut1.jpg)">
+		<div class="content" style= "background-image: url(${pageContext.request.contextPath}/resources/images/newspaper_design_cut1.jpg)">
 
-<%-- 				<c:if test="${sessionScope.user_active == false}"> --%>
-<%-- 					<c:import url="/WEB-INF/pages/tiles/guestInfo.jsp" /> --%>
-<%-- 				</c:if> --%>
-<%-- 				<c:if test="${sessionScope.user_active == true}"> --%>
 					<c:import url="/WEB-INF/pages/tiles/body.jsp" />
-<%-- 				</c:if> --%>
 
 
 			</div>
