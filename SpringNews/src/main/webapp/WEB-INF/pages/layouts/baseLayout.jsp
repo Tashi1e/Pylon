@@ -30,9 +30,7 @@
   <div class="modal-content" align="center" style="background-image: url(${pageContext.request.contextPath}/resources/images/newspaper_background.jpg)">
   		<c:import url="/WEB-INF/pages/modal/registration.jsp" />
   </div>
-
 </div>
-
 	<div class="page" >
 		<div class="header">
 			<c:import url="/WEB-INF/pages/tiles/header.jsp" />

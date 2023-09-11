@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <fmt:setLocale value="${sessionScope.locale}" />
 <fmt:setBundle basename="localization.locale" var="loc" />
@@ -40,25 +41,28 @@ input#publish {
 <c:if test=""></c:if>
 
 <div id="edit_field">
-<form action="controller" method="post" enctype="multipart/form-data">
+<form:form action="saveNews" modelAttribute="newsData" enctype="multipart/form-data">
 <c:if test="${presentation eq 'editNews'}">
 <input type="hidden" name="command" value="do_edit_news" />
 <input type="hidden" name="id" value="${news.id}" />
 </c:if>
-<c:if test="${requestScope.presentation eq 'addNews'}">
+<c:if test="${presentation eq 'addNews'}">
 <input type="hidden" name="command" value="do_add_news" />
 </c:if>
 <p> 
 <label for="title">Title</label>
-<textarea name="title" class="text_edit" id="title" placeholder="Enteer Your title here">${requestScope.news.title}</textarea>
+<form:textarea path="title" class="text_edit" id="title" placeholder="Enteer Your title here" />
+<%-- ${news.title} --%>
 </p>
 <p>
 <label for="brief">Brief</label>
-<textarea name="brief" class="text_edit" id="brief" placeholder="Enteer Your title here">${requestScope.news.brief}</textarea>
+<form:textarea path="brief" class="text_edit" id="brief" placeholder="Enteer Your title here" />
+<%-- ${news.brief}</form:textarea> --%>
 </p>
 <p>
 <label for="content">Content</label>
-<textarea name="content" class="text_edit" id="content" placeholder="Enteer Your content here">${requestScope.news.content}</textarea>
+<form:textarea path="content" class="text_edit" id="content" placeholder="Enteer Your content here" />
+<%-- ${news.content}</form:textarea> --%>
 </p>
 <p class="view-news-grid-container" style="margin-left: 0px">
 <input type="submit" id="save_button" class="button grey" value="${save_button}" />
@@ -68,7 +72,7 @@ ${add_image_button}
 </label>
 </p>
 
-</form>
+</form:form>
 
 <script type="text/javascript">
 function getName (str){

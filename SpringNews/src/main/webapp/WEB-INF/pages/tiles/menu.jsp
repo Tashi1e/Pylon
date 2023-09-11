@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 
 <fmt:setLocale value="${sessionScope.locale}" />
@@ -81,14 +82,13 @@ background-color: gold;
 <br>
 	<ul class="menu_list" style="list-style: none; text-align: left; padding-left: 0px">
 		<li><form action="controller" method="post">
-		<a href="controller?command=go_to_news_list">${news_list_link}</a>
+		<a href="main">${news_list_link}</a>
 		</form></li>
 		<c:if test="${userRole eq 'admin'}">
-			<li><a href="controller?command=go_to_add_edit_news_page&presentation=addNews">${add_news_link}</a></li>
-			<li><form action="controller" method="post" id="delete_news_form">
-			<input type="hidden" name="command" value="do_delete_news" />
-			<input class="link_button" type="submit" value="${delete_news_link}" />
-			</form></li>
+			<li><a href="addNews">${add_news_link}</a></li>
+			<li><form:form action="deleteNews" modelAttribute="newsData" id="delete_news_form">
+			<input class="link_button" type="submit"  value="${delete_news_link}" />
+			</form:form></li>
 		</c:if>
 	</ul>
 	<c:if test="${not(presentation eq 'newsList')}">

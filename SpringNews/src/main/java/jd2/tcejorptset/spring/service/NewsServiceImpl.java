@@ -12,8 +12,8 @@ import jd2.tcejorptset.spring.bean.UserInfo;
 import jd2.tcejorptset.spring.dao.NewsDAO;
 
 @Service
-public class NewsServiceImpl implements NewsService{
-	
+public class NewsServiceImpl implements NewsService {
+
 	@Autowired
 	private NewsDAO newsDAO;
 
@@ -55,8 +55,12 @@ public class NewsServiceImpl implements NewsService{
 	@Override
 	@Transactional
 	public News findById(int id) {
-		return newsDAO.fetchById(id);
+		News news = newsDAO.fetchById(id);
+		if (news != null) {
+			String author = news.getUserInfo().getFirstName() + " " + news.getUserInfo().getLastName();
+			news.setAuthor(author);
+		}
+		return news;
 	}
-
 
 }

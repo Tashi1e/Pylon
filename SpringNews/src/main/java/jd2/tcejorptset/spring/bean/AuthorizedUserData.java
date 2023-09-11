@@ -19,5 +19,6 @@ public class AuthorizedUserData {
 
 	private String userRole;
 	private String userNick;
+	private String userEmail;
 	
 }

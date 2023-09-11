@@ -1,6 +1,7 @@
 package jd2.tcejorptset.spring.bean;
 
 import java.io.File;
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 import javax.persistence.CascadeType;
@@ -14,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
 
@@ -32,7 +34,7 @@ import lombok.ToString;
 @Component
 @Entity
 @Table(name = "news")
-public class News implements Serializable{
+public class News implements Serializable {
 
 	private static final long serialVersionUID = 5998288721757839147L;  
 
@@ -63,8 +65,10 @@ public class News implements Serializable{
 	@JoinColumn(name = "authors_email", referencedColumnName = "email")
 	private UserInfo userInfo;
 
-//	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE, 
-//			CascadeType.DETACH, CascadeType.REFRESH })
-//	@JoinColumn(name = "users_login", nullable = false)
-//	private User User;
+	@Transient
+	private String author;
+	
+	@Transient
+	private int [] markedNewsId;
+
 }
