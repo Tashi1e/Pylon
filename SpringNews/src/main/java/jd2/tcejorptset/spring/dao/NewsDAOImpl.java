@@ -32,8 +32,8 @@ public class NewsDAOImpl implements NewsDAO {
 	public List<News> getLatestsList(int count) {
 		Session currentSession = sessionFactory.getCurrentSession();
 		Query <News> theQuery = currentSession.createQuery("from News", News.class);
-//		theQuery.setFirstResult(0);
-//		theQuery.setMaxResults(count);
+		theQuery.setFirstResult(0);
+		theQuery.setMaxResults(count);
 		return theQuery.getResultList();
 	}
 

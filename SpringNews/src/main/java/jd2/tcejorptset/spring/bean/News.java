@@ -1,7 +1,6 @@
 package jd2.tcejorptset.spring.bean;
 
 import java.io.File;
-import java.io.Serializable;
 import java.sql.Timestamp;
 
 import javax.persistence.CascadeType;
@@ -30,9 +29,7 @@ import lombok.ToString;
 
 @Entity
 @Table(name = "news")
-public class News implements Serializable {
-
-	private static final long serialVersionUID = -1111870449770483757L;
+public class News {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
