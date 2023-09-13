@@ -41,7 +41,8 @@ input#publish {
 <c:if test=""></c:if>
 
 <div id="edit_field">
-<form:form action="saveNews" modelAttribute="newsData" enctype="multipart/form-data">
+<form:form action="saveNews" modelAttribute="newsData"> 
+<!-- enctype="multipart/form-data"> -->
 <c:if test="${presentation eq 'editNews'}">
 <input type="hidden" name="command" value="do_edit_news" />
 <input type="hidden" name="id" value="${news.id}" />

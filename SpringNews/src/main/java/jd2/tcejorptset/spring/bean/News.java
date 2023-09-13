@@ -1,7 +1,9 @@
 package jd2.tcejorptset.spring.bean;
 
 import java.io.File;
+import java.io.OutputStream;
 import java.io.Serializable;
+import java.sql.Blob;
 import java.sql.Timestamp;
 
 import javax.persistence.CascadeType;
@@ -50,13 +52,13 @@ public class News implements Serializable {
 	private String brief;
 
 	@Column(name = "content")
-	private File content;
+	private Blob content;
 
 	@Column(name = "news_date")
 	private Timestamp date;
 
 	@Column(name = "news_image")
-	private File image;
+	private Blob image;
 
 	@Column(name = "status")
 	private short status;

@@ -1,5 +1,6 @@
 package jd2.tcejorptset.spring.service;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -20,6 +21,7 @@ public class NewsServiceImpl implements NewsService {
 	@Override
 	@Transactional
 	public void saveOrUpdate(News news) {
+		news.setDate(new Timestamp(System.currentTimeMillis()));
 		newsDAO.addOrUpdateNews(news);
 	}
 

@@ -15,6 +15,7 @@ import jd2.tcejorptset.spring.service.NewsService;
 import jd2.tcejorptset.spring.bean.AuthorizedUserData;
 import jd2.tcejorptset.spring.bean.News;
 import jd2.tcejorptset.spring.bean.UserData;
+import jd2.tcejorptset.spring.bean.UserInfo;
 
 @Controller
 @SessionAttributes("authData")
@@ -79,9 +80,13 @@ public class NewsController {
 	}
 
 	@RequestMapping("admin/saveNews")
-	public String saveNews(@ModelAttribute("newsData") News newsData, Model model) {
+	public String saveNews(@ModelAttribute("newsData") News newsData, @ModelAttribute("authData") AuthorizedUserData authData, Model model) {
+		System.out.println("saveNews -> title = " + newsData.getTitle());
+		UserInfo userInfo = new UserInfo();
+		userInfo.setEmail(authData.getUserEmail());
+		newsData.setUserInfo(userInfo);
 		newsService.saveOrUpdate(newsData);
-		return "redirect:*/main";
+		return "redirect:/main";
 	}
 
 	@RequestMapping("admin/deleteNews")
