@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jd2.tcejorptset.spring.service.ServiceException;
 import jd2.tcejorptset.spring.service.UserService;
@@ -23,19 +22,24 @@ import jd2.tcejorptset.spring.bean.UserToken;
 @SessionAttributes(names = {"role", "user"})
 public class UserController {
 
+	private final static String USER_ROLE_ATTRIBUTE = "role";
+	private final static String USER_INFO_ATTRIBUTE = "user";
+	private final static String SELECTOR_NAME = "selector";
+	private final static String VALIDATOR_NAME = "validator";
+	
 	@Autowired
 	private UserService service;
 	
 	@RequestMapping("/autoSignIn")
-	public String cookiesSignIn(@CookieValue(value = ConstantName.SELECTOR, required = false) Cookie selector,
-			@CookieValue(value = ConstantName.VALIDATOR, required = false) Cookie validator, Model model) {
+	public String cookiesSignIn(@CookieValue(value = "selector", required = false) Cookie selector,
+			@CookieValue(value = "validator", required = false) Cookie validator, Model model) {
 		if (selector == null || validator == null) {
 			return "redirect:/guest/main";
 		}
 		AuthorizedUserData authorizedUserData = service.tokenSignIn(selector.getValue(), validator.getValue());
 		if (authorizedUserData != null) {
-			model.addAttribute("role", authorizedUserData.getUserRole());
-			model.addAttribute("user", authorizedUserData.getUserInfo());
+			model.addAttribute(USER_ROLE_ATTRIBUTE, authorizedUserData.getUserRole());
+			model.addAttribute(USER_INFO_ATTRIBUTE, authorizedUserData.getUserInfo());
 			return "redirect:/"+authorizedUserData.getUserRole()+"/main";
 		} else {
 			return "redirect:/guest/main";
@@ -48,11 +52,11 @@ public class UserController {
 
 		if (authorizedUserData.getUserRole() != null && userData.getRememberMeCheckBox() != null) {
 				UserToken userToken = service.saveUserToken(userData.getUser().getLogin());
-				response.addCookie(new Cookie(ConstantName.SELECTOR, userToken.getSelector()));
-				response.addCookie(new Cookie(ConstantName.VALIDATOR, userToken.getValidator()));
+				response.addCookie(new Cookie(SELECTOR_NAME, userToken.getSelector()));
+				response.addCookie(new Cookie(VALIDATOR_NAME, userToken.getValidator()));
 		}
-		model.addAttribute("role", authorizedUserData.getUserRole());
-		model.addAttribute("user", authorizedUserData.getUserInfo());
+		model.addAttribute(USER_ROLE_ATTRIBUTE, authorizedUserData.getUserRole());
+		model.addAttribute(USER_INFO_ATTRIBUTE, authorizedUserData.getUserInfo());
 		return "redirect:/"+authorizedUserData.getUserRole()+"/main";
 	}
 

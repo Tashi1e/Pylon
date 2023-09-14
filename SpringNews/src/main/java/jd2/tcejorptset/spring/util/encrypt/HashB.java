@@ -12,7 +12,7 @@ public class HashB implements Encryptor {
 	}
 	
 	@Override
-	public boolean compare (String regular, String encrypted) {
+	public boolean similarity (String regular, String encrypted) {
 		return BCrypt.checkpw(regular, encrypted);
 	}
 

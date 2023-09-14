@@ -12,7 +12,6 @@ public interface UserService {
 	
 	AuthorizedUserData signIn (String login, String password);
 	AuthorizedUserData tokenSignIn(String selector, String validator);
-	UserData getUserData (String login);
 	UserToken saveUserToken (String login);  
 	boolean registration (User user, UserInfo userInfo) throws ServiceException;
 	

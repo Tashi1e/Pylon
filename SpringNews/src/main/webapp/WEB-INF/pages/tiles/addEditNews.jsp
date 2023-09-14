@@ -43,13 +43,12 @@ input#publish {
 <div id="edit_field">
 <form:form action="saveNews" modelAttribute="newsData"> 
 <!-- enctype="multipart/form-data"> -->
-<c:if test="${presentation eq 'editNews'}">
-<input type="hidden" name="command" value="do_edit_news" />
-<input type="hidden" name="id" value="${news.id}" />
-</c:if>
-<c:if test="${presentation eq 'addNews'}">
-<input type="hidden" name="command" value="do_add_news" />
-</c:if>
+<%-- <c:if test="${presentation eq 'editNews'}"> --%>
+<%-- <input type="hidden" name="id" value="${news.id}" /> --%>
+<%-- </c:if> --%>
+<%-- <c:if test="${presentation eq 'addNews'}"> --%>
+<!-- <input type="hidden" name="command" value="do_add_news" /> -->
+<%-- </c:if> --%>
 <p> 
 <label for="title">Title</label>
 <form:textarea path="title" class="text_edit" id="title" placeholder="Enteer Your title here" />

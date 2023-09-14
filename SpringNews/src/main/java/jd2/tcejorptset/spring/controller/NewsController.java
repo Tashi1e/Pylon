@@ -18,14 +18,18 @@ import jd2.tcejorptset.spring.bean.UserData;
 import jd2.tcejorptset.spring.bean.UserInfo;
 
 @Controller
-@SessionAttributes(names = {"role", "user"})
+@SessionAttributes(names = { "role", "user" })
 public class NewsController {
-	
-	private final static String PAGE_PRESENTATION_KEY = "presentation";
+
+	private final static String PAGE_PRESENTATION_ATTRIBUTE = "presentation";
 	private final static String PRESENTATION_NEWS_LIST = "newsList";
 	private final static String PRESENTATION_VIEW_NEWS = "viewNews";
 	private final static String PRESENTATION_ADD_NEWS = "addNews";
 	private final static String PRESENTATION_EDIT_NEWS = "editNews";
+	private final static String NEWS_ATTRIBUTE = "news";
+	private final static String NEWS_LIST_ATTRIBUTE = "newsList";
+	private final static String USER_DATA_ATTRIBUTE = "userData";
+	private final static String NEWS_DATA_ATTRIBUTE = "newsData";
 
 	@Autowired
 	private NewsService newsService;
@@ -34,7 +38,7 @@ public class NewsController {
 	public String gtRole() {
 		return "";
 	}
-	
+
 	@ModelAttribute("user")
 	public UserInfo gtUserInfo() {
 		return new UserInfo();
@@ -43,20 +47,20 @@ public class NewsController {
 	@RequestMapping("*/main")
 	public String mainPage(Model model) {
 		List<News> newsList = newsService.latestList();
-		model.addAttribute("newsList", newsList);
+		model.addAttribute(NEWS_LIST_ATTRIBUTE, newsList);
 //		System.out.println("mainPage -> role = " + authData.getUserRole()); // FLAG
-		model.addAttribute(PAGE_PRESENTATION_KEY, PRESENTATION_NEWS_LIST);
-		model.addAttribute("userData", new UserData());
-		model.addAttribute("newsData", new News());
+		model.addAttribute(PAGE_PRESENTATION_ATTRIBUTE, PRESENTATION_NEWS_LIST);
+		model.addAttribute(USER_DATA_ATTRIBUTE, new UserData());
+		model.addAttribute(NEWS_DATA_ATTRIBUTE, new News());
 		return "layouts/baseLayout";
 	}
 
 	@RequestMapping(value = { "/user/news", "/admin/news" })
 	public String newsPage(@ModelAttribute("newsId") int newsId, Model model) {
 		News news = newsService.findById(newsId);
-		model.addAttribute("news", news);
-		model.addAttribute(PAGE_PRESENTATION_KEY, PRESENTATION_VIEW_NEWS);
-		model.addAttribute("userData", new UserData());
+		model.addAttribute(NEWS_ATTRIBUTE, news);
+		model.addAttribute(PAGE_PRESENTATION_ATTRIBUTE, PRESENTATION_VIEW_NEWS);
+		model.addAttribute(USER_DATA_ATTRIBUTE, new UserData());
 		return "layouts/baseLayout";
 	}
 
@@ -67,33 +71,36 @@ public class NewsController {
 
 	@RequestMapping("admin/addNews")
 	public String addNewsPage(Model model) {
-		model.addAttribute(PAGE_PRESENTATION_KEY, PRESENTATION_ADD_NEWS);
-		model.addAttribute("userData", new UserData());
-		model.addAttribute("newsData", new News());
+		model.addAttribute(PAGE_PRESENTATION_ATTRIBUTE, PRESENTATION_ADD_NEWS);
+		model.addAttribute(USER_DATA_ATTRIBUTE, new UserData());
+		model.addAttribute(NEWS_DATA_ATTRIBUTE, new News());
 		return "layouts/baseLayout";
 	}
 
 	@RequestMapping("admin/editNews")
-	public String editNewsPage(@ModelAttribute("news") News newsXz, Model model) {
-		News news = newsService.findById(newsXz.getId());
-		model.addAttribute(PAGE_PRESENTATION_KEY, PRESENTATION_EDIT_NEWS);
-		model.addAttribute("userData", new UserData());
-		model.addAttribute("newsData", news);
+	public String editNewsPage(@ModelAttribute("newsId") int newsId, Model model) {
+		News news = newsService.findById(newsId);
+		model.addAttribute(PAGE_PRESENTATION_ATTRIBUTE, PRESENTATION_EDIT_NEWS);
+		model.addAttribute(USER_DATA_ATTRIBUTE, new UserData());
+		model.addAttribute(NEWS_DATA_ATTRIBUTE, news);
 		return "layouts/baseLayout";
 	}
 
 	@RequestMapping("admin/saveNews")
-	public String saveNews(@ModelAttribute("newsData") News newsData, @ModelAttribute("user") UserInfo userInfo, Model model) {
-		System.out.println("saveNews -> title = " + newsData.getTitle()); //FLAG
+	public String saveNews(@ModelAttribute("newsData") News newsData, @ModelAttribute("user") UserInfo userInfo,
+			Model model) {
+//		System.out.println("saveNews -> title = " + newsData.getTitle()); //FLAG
 		newsData.setUserInfo(userInfo);
 		newsService.saveOrUpdate(newsData);
 		return "redirect:/admin/main";
 	}
 
 	@RequestMapping("admin/deleteNews")
-	public String deleteNews(Model model) {
-//		model.addAttribute("role", userRole);
-		return "layouts/baseLayout";
+	public String deleteNews(@ModelAttribute("news") News news, Model model) {
+		if (news.getMarkedNewsId() != null) {
+			newsService.delete(news.getMarkedNewsId());
+		} 
+		return "redirect:/admin/main";
 	}
 
 }

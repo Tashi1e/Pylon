@@ -56,9 +56,11 @@ public class NewsDAOImpl implements NewsDAO {
 	@Override
 	public void deleteNews(int[] newsId) {
 		Session currentSession = sessionFactory.getCurrentSession();
-		Query<News> theQuery = currentSession.createQuery("delete from News where id = :newsId", News.class);
-		theQuery.setParameter("newsId", newsId);
+		for (int id : newsId) {
+		Query <News> theQuery = currentSession.createQuery("delete from News where id = :newsId", News.class);
+		theQuery.setParameter("newsId", id);
 		theQuery.executeUpdate();
+		}
 	}
 
 }

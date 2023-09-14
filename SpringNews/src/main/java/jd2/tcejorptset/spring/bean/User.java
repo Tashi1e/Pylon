@@ -1,16 +1,10 @@
 package jd2.tcejorptset.spring.bean;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -53,17 +47,6 @@ public class User {
 	@PrimaryKeyJoinColumn
 	private UserRole userRole;
  
-//	@OneToMany(mappedBy ="user", fetch=FetchType.LAZY,
-//			   cascade= {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
-//	private Set<News> newsList = new HashSet<>();
-	
-//	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE, 
-//			CascadeType.DETACH,CascadeType.REFRESH })
-//	@JoinTable(name = "users_has_roles", 
-//			joinColumns = @JoinColumn(name = "users_id", referencedColumnName="id"), 
-//			inverseJoinColumns = @JoinColumn(name = "roles_id", referencedColumnName="id"))
-//	private List <UserRole> userRoleList;
-
 	public User(String login, String password) {
 		this.login = login;
 		this.password = password;
@@ -83,13 +66,5 @@ public class User {
 		this.userRole = userRole;
 		this.userRole.setUser(this);
 	}
-	
-//	public void addNews(News news) {
-//		if (newsList == null) {
-//			newsList = new ArrayList<>();
-//		}
-//		newsList.add(news);
-//		news.setUser(this);
-//	}
 	
 }

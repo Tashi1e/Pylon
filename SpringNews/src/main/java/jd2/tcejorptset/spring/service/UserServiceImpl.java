@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
 		User user = userDAO.getUser(login);
 		AuthorizedUserData userData = new AuthorizedUserData();
 		userData.setUserRole("guest");
-		if (user != null && bcryptor.compare(password, user.getPassword())) {
+		if (user != null && bcryptor.similarity(password, user.getPassword())) {
 			userData.setUserRole(user.getUserRole().getRole());
 			userData.setUserInfo(user.getUserInfo()); ;
 //			System.out.println("Service -> signIn -> role = " + user.getUserRole().getRole()); // FLAG
@@ -64,13 +64,6 @@ public class UserServiceImpl implements UserService {
 			userData.setUserInfo(innerToken.getUser().getUserInfo()); ;
 		}
 		return userData;
-	}
-
-	@Override
-//	@Transactional
-	public UserData getUserData(String login) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

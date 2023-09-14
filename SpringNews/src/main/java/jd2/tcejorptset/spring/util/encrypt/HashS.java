@@ -13,7 +13,7 @@ public class HashS implements Encryptor {
 	}
 
 	@Override
-	public boolean compare(String regular, String encrypted) {
+	public boolean similarity (String regular, String encrypted) {
 		return SCryptUtil.check(regular, encrypted);
 	}
 

@@ -49,15 +49,13 @@
 
 <c:if test="${role eq 'admin' || role eq 'editor'}">
 	<div class="view-news-grid-container">
-		<form:form action="editNews" >
-			<form:hidden  path="newsId" value="${news.id}" /> 
+		<form:form action="editNews?newsId=${news.id}" >
 			<input type="submit" class="button grey" value="${edit_button}" />
 		</form:form>
 
-		<form action="controller" method="post">
-			<input type="hidden" name="command" value="do_delete_news" /> 
-			<input type="hidden" name="id" value="${news.id}" />
+		<form:form action="deleteNews" modelAttribute="news">
+		<form:hidden path="markedNewsId" value="${news.id} " />
 			<input type="submit" class="button transperent" value="${delete_button}" />
-		</form>
+		</form:form>
 	</div>
 </c:if>

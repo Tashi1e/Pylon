@@ -34,11 +34,6 @@ public class NewsServiceImpl implements NewsService {
 	@Override
 	@Transactional
 	public List<News> latestList(int count) {
-//		List <News> tempList = newsDAO.getLatestsList(count);
-//		if (!tempList.isEmpty()) { //FLAG
-//			System.out.println(tempList.get(0).getUserInfo().getFirstName() + " " + tempList.get(0).getUserInfo().getLastName()); //FLAG
-//		} //FLAG
-//		return tempList;
 		return newsDAO.getLatestsList(count);
 	}
 
@@ -50,8 +45,7 @@ public class NewsServiceImpl implements NewsService {
 	@Override
 	@Transactional
 	public List<News> find(String keyWord) {
-		// TODO Auto-generated method stub
-		return null;
+		return newsDAO.getListByKeyword(keyWord);
 	}
 
 	@Override
