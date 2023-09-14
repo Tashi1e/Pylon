@@ -84,7 +84,7 @@ background-color: gold;
 		<li><form action="controller" method="post">
 		<a href="main">${news_list_link}</a>
 		</form></li>
-		<c:if test="${userRole eq 'admin'}">
+		<c:if test="${role eq 'admin'}">
 			<li><a href="addNews">${add_news_link}</a></li>
 			<li><form:form action="deleteNews" modelAttribute="newsData" id="delete_news_form">
 			<input class="link_button" type="submit"  value="${delete_news_link}" />

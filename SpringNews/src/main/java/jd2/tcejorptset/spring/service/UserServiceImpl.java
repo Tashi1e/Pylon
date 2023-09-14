@@ -41,8 +41,7 @@ public class UserServiceImpl implements UserService {
 		userData.setUserRole("guest");
 		if (user != null && bcryptor.compare(password, user.getPassword())) {
 			userData.setUserRole(user.getUserRole().getRole());
-			userData.setUserNick(user.getUserInfo().getNickName());
-			userData.setUserEmail(user.getUserInfo().getEmail());
+			userData.setUserInfo(user.getUserInfo()); ;
 //			System.out.println("Service -> signIn -> role = " + user.getUserRole().getRole()); // FLAG
 		}
 		return userData;
@@ -62,8 +61,7 @@ public class UserServiceImpl implements UserService {
 		if (innerToken != null) {
 			System.out.println("tokenSignIn -> role = " + innerToken.getUser().getUserRole().getRole());// FLAG
 			userData.setUserRole(innerToken.getUser().getUserRole().getRole());
-			userData.setUserNick(innerToken.getUser().getUserInfo().getNickName());
-			userData.setUserEmail(innerToken.getUser().getUserInfo().getEmail());
+			userData.setUserInfo(innerToken.getUser().getUserInfo()); ;
 		}
 		return userData;
 	}

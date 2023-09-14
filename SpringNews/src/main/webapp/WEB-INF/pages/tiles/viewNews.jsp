@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
 <fmt:setLocale value="${sessionScope.locale}" />
 <fmt:setBundle basename="localization.locale" var="loc" />
@@ -46,14 +47,12 @@
 	</table>
 </div>
 
-<c:if test="${userRole eq 'admin' || userRole eq 'editor'}">
+<c:if test="${role eq 'admin' || role eq 'editor'}">
 	<div class="view-news-grid-container">
-		<form action="controller" method="get">
-			<input type="hidden" name="command" value="go_to_add_edit_news_page" /> 
-			<input type="hidden" name="id" value="${news.id}" /> 
-			<input type="hidden" name="presentation" value="editNews" />
+		<form:form action="editNews" >
+			<form:hidden  path="newsId" value="${news.id}" /> 
 			<input type="submit" class="button grey" value="${edit_button}" />
-		</form>
+		</form:form>
 
 		<form action="controller" method="post">
 			<input type="hidden" name="command" value="do_delete_news" /> 

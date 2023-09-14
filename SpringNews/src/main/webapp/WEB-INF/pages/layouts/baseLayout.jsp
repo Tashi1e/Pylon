@@ -39,13 +39,13 @@
 		<div class="base-layout-wrapper">
 			<div class="menu">
 
-				<c:if test="${userRole eq 'guest' or userRole == null}">
+				<c:if test="${role eq 'guest' or role == null or role eq ''}">
 				<br/>
 				<h4 style = "padding-left: 15px">
 				    ${welcome_guest}
 				    </h4> 
 				</c:if>
-				<c:if test="${not(userRole eq 'guest') and userRole != null}">
+				<c:if test="${not(role eq 'guest') and role != null and not(role eq '')}">
 					<c:import url="/WEB-INF/pages/tiles/menu.jsp" />
 				</c:if>
 		</div>

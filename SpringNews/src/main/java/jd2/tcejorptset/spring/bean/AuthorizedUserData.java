@@ -18,7 +18,6 @@ import lombok.ToString;
 public class AuthorizedUserData {
 
 	private String userRole;
-	private String userNick;
-	private String userEmail;
+	private UserInfo userInfo;
 	
 }

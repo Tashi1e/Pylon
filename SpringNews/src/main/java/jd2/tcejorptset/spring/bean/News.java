@@ -52,7 +52,7 @@ public class News implements Serializable {
 	private String brief;
 
 	@Column(name = "content")
-	private Blob content;
+	private String content;
 
 	@Column(name = "news_date")
 	private Timestamp date;

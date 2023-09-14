@@ -20,7 +20,7 @@ import jd2.tcejorptset.spring.bean.UserData;
 import jd2.tcejorptset.spring.bean.UserToken; 
 
 @Controller
-@SessionAttributes("authData")
+@SessionAttributes(names = {"role", "user"})
 public class UserController {
 
 	@Autowired
@@ -34,7 +34,8 @@ public class UserController {
 		}
 		AuthorizedUserData authorizedUserData = service.tokenSignIn(selector.getValue(), validator.getValue());
 		if (authorizedUserData != null) {
-			model.addAttribute("authData", authorizedUserData);
+			model.addAttribute("role", authorizedUserData.getUserRole());
+			model.addAttribute("user", authorizedUserData.getUserInfo());
 			return "redirect:/"+authorizedUserData.getUserRole()+"/main";
 		} else {
 			return "redirect:/guest/main";
@@ -50,7 +51,8 @@ public class UserController {
 				response.addCookie(new Cookie(ConstantName.SELECTOR, userToken.getSelector()));
 				response.addCookie(new Cookie(ConstantName.VALIDATOR, userToken.getValidator()));
 		}
-		model.addAttribute("authData", authorizedUserData);
+		model.addAttribute("role", authorizedUserData.getUserRole());
+		model.addAttribute("user", authorizedUserData.getUserInfo());
 		return "redirect:/"+authorizedUserData.getUserRole()+"/main";
 	}
 

@@ -40,14 +40,14 @@
 			</a>
 <%-- 		</form> --%>
 	</div>
-	<c:if test="${not(userRole eq 'guest') and userRole != null}">
+	<c:if test="${not(role eq 'guest') and role != null}">
 	<div class="header-grid-item" align="right" style="padding-top: 15px;">
-	${userNick}
+	${user.nickName}
 	</div>
 	</c:if>
 	
 	<div class="header-grid-item-login" align="right">
-	<c:if test="${userRole eq 'guest' or userRole eq'' or userRole == null}">
+	<c:if test="${role eq 'guest' or role eq'' or role == null}">
 		<form:form action="signin" modelAttribute="userData" id="box">
 			<form:checkbox path="rememberMeCheckBox" value="${remembButton}" id="checkbox" style="display: none" />
 			<input type="hidden" class = "button grey" value="${signinButton}" id="signin" />
@@ -65,7 +65,7 @@
 				</form:form>
 		</c:if>
 		
-	<c:if test="${not(userRole eq 'guest') and userRole != null and not(userRole eq '')}">
+	<c:if test="${not(role eq 'guest') and role != null and not(role eq '')}">
 		<form:form action="signout">
 			<input type="submit" class="button transperent" value="${signoutButton}" id="signOut" /> 
 		</form:form>

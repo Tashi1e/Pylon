@@ -57,7 +57,7 @@ input#publish {
 </p>
 <p>
 <label for="brief">Brief</label>
-<form:textarea path="brief" class="text_edit" id="brief" placeholder="Enteer Your title here" />
+<form:textarea path="brief" class="text_edit" id="brief" placeholder="Enteer Your brief here" title="sddfgsdfsdfdfs"/>
 <%-- ${news.brief}</form:textarea> --%>
 </p>
 <p>
