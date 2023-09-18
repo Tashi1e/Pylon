@@ -44,7 +44,7 @@ public class NewsServiceImpl implements NewsService {
 
 	@Override
 	@Transactional
-	public List<News> find(String keyWord) {
+	public List<News> find(String keyWord) { 
 		return newsDAO.getListByKeyword(keyWord);
 	}
 
