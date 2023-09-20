@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
-    xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans
@@ -15,13 +15,15 @@
 		http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 	<!-- Support for component scanning -->
-	<context:component-scan base-package="jd2.tcejorptset.spring" />
+	<context:component-scan
+		base-package="jd2.tcejorptset.spring" />
 
 	<!-- Add support for conversion, formatting and validation support -->
-	<mvc:annotation-driven/>
-	
+	<mvc:annotation-driven />
+
 	<!-- Support for reading/writing web resources: css, images, js, etc ... -->
-	<mvc:resources location="/resources/" mapping="/resources/**"></mvc:resources>
+	<mvc:resources location="/resources/"
+		mapping="/resources/**"></mvc:resources>
 
 	<!-- Define Spring MVC view resolver -->
 	<bean
@@ -29,53 +31,83 @@
 		<property name="prefix" value="/WEB-INF/pages/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-	
-	<!-- Define Database DataSource / connection pool -->
-	<bean id="myDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
-		<!-- Database connection properties -->
-        <property name="driverClass" value="com.mysql.cj.jdbc.Driver" />
-        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/spring_news_db?useSSL=false" />
-        <property name="user" value="root" />
-        <property name="password" value="q1w2e3r4t5y6" /> 
 
-        <!-- Connection pool properties for C3P0 -->
-        <property name="minPoolSize" value="3" />
-        <property name="maxPoolSize" value="9" />
-        <property name="maxIdleTime" value="30000" />
-	</bean>  
-	
-    <!-- Setup Hibernate session factory -->
+	<!-- Define Database DataSource / connection pool -->
+	<bean id="myDataSource"
+		class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<!-- Database connection properties -->
+		<property name="driverClass" value="com.mysql.cj.jdbc.Driver" />
+		<property name="jdbcUrl"
+			value="jdbc:mysql://localhost:3306/spring_news_db?useSSL=false" />
+		<property name="user" value="root" />
+		<property name="password" value="q1w2e3r4t5y6" />
+
+		<!-- Connection pool properties for C3P0 -->
+		<property name="minPoolSize" value="3" />
+		<property name="maxPoolSize" value="9" />
+		<property name="maxIdleTime" value="30000" />
+	</bean>
+
+	<!-- Setup Hibernate session factory -->
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
 		<property name="dataSource" ref="myDataSource" />
-		<property name="packagesToScan" value="jd2.tcejorptset.spring.bean" />
+		<property name="packagesToScan"
+			value="jd2.tcejorptset.spring.bean" />
 		<property name="hibernateProperties">
-		   <props>
-		      <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
-		      <prop key="hibernate.show_sql">true</prop>
-		   </props>
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+			</props>
 		</property>
-   </bean>	   
+	</bean>
 
-    <!-- Setup Hibernate transaction manager -->
+	<!-- Setup Hibernate transaction manager -->
 	<bean id="myTransactionManager"
-            class="org.springframework.orm.hibernate5.HibernateTransactionManager">
-        <property name="sessionFactory" ref="sessionFactory"/>
-    </bean>
-    
-    <!-- Enable configuration of transactional behavior based on annotations -->
-	<tx:annotation-driven transaction-manager="myTransactionManager" />
-	
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<!-- Enable configuration of transactional behavior based on annotations -->
+	<tx:annotation-driven
+		transaction-manager="myTransactionManager" />
+
 	<!-- Define object for storing current model attributes -->
-	<bean id="attributesContainer" class="java.util.HashMap" >
+	<bean id="attributesContainer" class="java.util.HashMap">
 	</bean>
-	
-	<bean id="userRole" class="java.lang.String" >
+
+	<bean id="userRole" class="java.lang.String">
 	</bean>
-	
-	<bean id="userNick" class="java.lang.String" >
+
+	<bean id="userNick" class="java.lang.String">
 	</bean>
-	
+
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+		<property name="defaultLocale" value="en" />
+	</bean>
+
+			<bean id="localeChangeInterceptor"
+				class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+				<property name="paramName" value="locale" />
+			</bean>
+
+	<bean
+		class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping">
+		<property name="interceptors">
+			<list>
+				<ref bean="localeChangeInterceptor" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- Register the welcome.properties -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="localization/locale" />
+	</bean>
+
 </beans>
 
 

@@ -11,5 +11,6 @@
 </head>
 <body>
 About JSP.
+${errorCode}
 </body>
 </html>

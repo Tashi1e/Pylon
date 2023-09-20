@@ -18,46 +18,65 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public User getUser(String login) {
+		try {
 		Session currentSession = sessionFactory.getCurrentSession();
-		Query<User> theQuery = currentSession.createQuery("from User where login = :userLogin", User.class);
+		Query <User> theQuery = currentSession.createQuery("from User where login = :userLogin", User.class);
 		theQuery.setParameter("userLogin", login);
 		return theQuery.uniqueResult();
+		} catch (Exception e) {
+			throw new RuntimeException("noLogin", e);
+		}
 	}
 	
 	@Override
 	public UserToken getUserToken(String selector, String validator) {
+		UserToken token = null;
+		try {
 		Session currentSession = sessionFactory.getCurrentSession();
 		Query<UserToken> theQuery = currentSession.createQuery
 				("from UserToken where selector = :userSelector and validator = :userValidator", UserToken.class);
 		theQuery.setParameter("userSelector", selector);
 		theQuery.setParameter("userValidator", validator);
-		UserToken token = theQuery.uniqueResult();
-		if (token != null) { //FLAG
-		System.out.println("getUserToken -> selector + validator = " + token.getSelector() + " + " + token.getValidator()); //FLAG
-		} //FLAG
+		token = theQuery.uniqueResult();
+//		if (token != null) { //FLAG
+//		System.out.println("getUserToken -> selector + validator = " + token.getSelector() + " + " + token.getValidator()); //FLAG
+//		} //FLAG
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 		return token;
 	}
 	
 	@Override
 	public boolean emailExists(String login) {
+		try {
 		Session currentSession = sessionFactory.getCurrentSession();
 		Query<UserInfo> theQuery = currentSession.createQuery("from UserInfo where email = :userEmail", UserInfo.class);
 		theQuery.setParameter("userEmail", login);
 		return theQuery.uniqueResult()!=null;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 
 	@Override
-	public boolean saveUser(User user) {
+	public void saveUser(User user) {
+		try {
 		Session currentSession = sessionFactory.getCurrentSession();
 		currentSession.saveOrUpdate(user);
-		return true;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 	
 	@Override
-	public boolean addOrUpdateToken(UserToken userToken) {
+	public void addOrUpdateToken(UserToken userToken) {
+		try {
 		Session currentSession = sessionFactory.getCurrentSession();
 		currentSession.saveOrUpdate(userToken);
-		return true;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 }

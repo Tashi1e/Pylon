@@ -11,15 +11,15 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import jd2.tcejorptset.spring.service.ServiceException;
 import jd2.tcejorptset.spring.service.UserService;
 import jd2.tcejorptset.spring.bean.AuthorizedUserData;
 import jd2.tcejorptset.spring.bean.UserData;
-import jd2.tcejorptset.spring.bean.UserToken; 
+import jd2.tcejorptset.spring.bean.UserToken;
 
 @Controller
-@SessionAttributes(names = {"role", "user"})
+@SessionAttributes(names = {"role", "user", "locale"})
 public class UserController {
 
 	private final static String USER_ROLE_ATTRIBUTE = "role";
@@ -30,13 +30,19 @@ public class UserController {
 	@Autowired
 	private UserService service;
 	
+//	@ModelAttribute("locale")
+//	public String gtLocale() {
+//		return "";
+//	}
+	
 	@RequestMapping("/autoSignIn")
 	public String cookiesSignIn(@CookieValue(value = "selector", required = false) Cookie selector,
 			@CookieValue(value = "validator", required = false) Cookie validator, Model model) {
 		if (selector == null || validator == null) {
 			return "redirect:/guest/main";
 		}
-		AuthorizedUserData authorizedUserData = service.tokenSignIn(selector.getValue(), validator.getValue());
+		AuthorizedUserData authorizedUserData = null;
+			authorizedUserData = service.tokenSignIn(selector.getValue(), validator.getValue());
 		if (authorizedUserData != null) {
 			model.addAttribute(USER_ROLE_ATTRIBUTE, authorizedUserData.getUserRole());
 			model.addAttribute(USER_INFO_ATTRIBUTE, authorizedUserData.getUserInfo());
@@ -47,11 +53,11 @@ public class UserController {
 	}
 
 	@RequestMapping("*/signin") 
-	public String doSignIn(@ModelAttribute("userData") UserData userData, HttpServletResponse response, Model model) {
+	public String doSignIn(@ModelAttribute("userData") UserData userData, HttpServletResponse response, Model model, RedirectAttributes redirectAttr) {
 		AuthorizedUserData authorizedUserData = service.signIn(userData.getUser().getLogin(), userData.getUser().getPassword());
-
 		if (authorizedUserData.getUserRole() != null && userData.getRememberMeCheckBox() != null) {
-				UserToken userToken = service.saveUserToken(userData.getUser().getLogin());
+				UserToken userToken = null;
+					userToken = service.saveUserToken(userData.getUser().getLogin());
 				response.addCookie(new Cookie(SELECTOR_NAME, userToken.getSelector()));
 				response.addCookie(new Cookie(VALIDATOR_NAME, userToken.getValidator()));
 		}
@@ -67,13 +73,8 @@ public class UserController {
 	}
 
 	@RequestMapping("*/register")
-	public String doRegister(@ModelAttribute("userData") UserData userData) {
-		try {
+	public String doRegister(@ModelAttribute("userData") UserData userData, RedirectAttributes redirectAttr) {
 			service.registration(userData.getUser(), userData.getUserInfo());
-		} catch (ServiceException e) {
-			// TODO Auto-generated catch block
-			throw new RuntimeException(e);
-		}
 		return "redirect:/guest/main";
 	}
 

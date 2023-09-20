@@ -1,8 +1,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<fmt:setLocale value="${sessionScope.locale}" />
+<fmt:setLocale value="${locale}" />
 <fmt:setBundle basename="localization.locale" var="loc" />
 
 <fmt:message bundle="${loc}" key="local.login.button.name" var="loginButton" />
@@ -12,7 +13,7 @@
 <fmt:message bundle="${loc}" key="local.signout.button.name" var="signoutButton" />
 <fmt:message bundle="${loc}" key="local.login.label.name" var="loginLabel" />
 <fmt:message bundle="${loc}" key="local.password.label.name" var="passLabel" />
-<fmt:message bundle="${loc}" key="local.error.code.${sessionScope.errorCode}" var="errorMessage" />
+<fmt:message bundle="${loc}" key="local.error.code.${errorCode}" var="errorMessage" />
 
 <div class="header-grid-container">
 
@@ -31,11 +32,11 @@
 
 	<div class="header-grid-item" align="right">
 <%-- 		<form> --%>
-			<a href="controller?locale=en&command=do_change_locale" style="text-decoration: none">
+			<a href="?locale=en" style="text-decoration: none">
 			<img alt="" src="${pageContext.request.contextPath}/resources/images/us.svg" style="height: 15px" />
 			</a> 
 			&nbsp;&nbsp; 
-			<a href="controller?locale=ru&command=do_change_locale" style="text-decoration: none">
+			<a href="?locale=ru" style="text-decoration: none">
 			<img alt="" src="${pageContext.request.contextPath}/resources/images/ru.svg" style="height: 15px" />
 			</a>
 <%-- 		</form> --%>

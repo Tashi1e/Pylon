@@ -8,6 +8,6 @@ public interface UserDAO {
 	User getUser (String login);
 	UserToken getUserToken(String selector, String validator);
 	boolean emailExists(String login);
-	boolean saveUser (User user);
-	boolean addOrUpdateToken (UserToken userToken);
+	void saveUser (User user);
+	void addOrUpdateToken (UserToken userToken);
 }

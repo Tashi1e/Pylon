@@ -10,5 +10,5 @@ public interface NewsDAO {
 	List<News> getLatestsList(int count);
 	News fetchById(int newsId);
 	void addOrUpdateNews(News news);
-	void deleteNews(int [] newsId);
+	void deleteNews(Integer [] newsId);
 }

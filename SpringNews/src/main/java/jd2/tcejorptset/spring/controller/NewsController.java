@@ -7,18 +7,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jd2.tcejorptset.spring.service.NewsService;
-import jd2.tcejorptset.spring.bean.AuthorizedUserData;
 import jd2.tcejorptset.spring.bean.News;
 import jd2.tcejorptset.spring.bean.UserData;
 import jd2.tcejorptset.spring.bean.UserInfo;
 
 @Controller
-@SessionAttributes(names = { "role", "user" })
+@SessionAttributes(names = { "role", "user", "locale" })
 public class NewsController {
 
 	private final static String PAGE_PRESENTATION_ATTRIBUTE = "presentation";
@@ -43,12 +41,19 @@ public class NewsController {
 	public UserInfo gtUserInfo() {
 		return new UserInfo();
 	}
+	
+//	@ModelAttribute("locale")
+//	public String gtLocale() {
+//		return "";
+//	}
 
 	@RequestMapping("*/main")
-	public String mainPage(Model model) {
+	public String mainPage(@ModelAttribute("errorCode") String errorCode, 
+			@ModelAttribute("locale") String locale,
+			Model model) {
 		List<News> newsList = newsService.latestList();
+System.out.println("mainPage -> locale = " + locale); //FLAG
 		model.addAttribute(NEWS_LIST_ATTRIBUTE, newsList);
-//		System.out.println("mainPage -> role = " + authData.getUserRole()); // FLAG
 		model.addAttribute(PAGE_PRESENTATION_ATTRIBUTE, PRESENTATION_NEWS_LIST);
 		model.addAttribute(USER_DATA_ATTRIBUTE, new UserData());
 		model.addAttribute(NEWS_DATA_ATTRIBUTE, new News());
@@ -56,7 +61,7 @@ public class NewsController {
 	}
 
 	@RequestMapping(value = { "/user/news", "/admin/news" })
-	public String newsPage(@ModelAttribute("newsId") int newsId, Model model) {
+	public String newsPage(@ModelAttribute("newsId") int newsId, Model model, RedirectAttributes redirectAttr) {
 		News news = newsService.findById(newsId);
 		model.addAttribute(NEWS_ATTRIBUTE, news);
 		model.addAttribute(PAGE_PRESENTATION_ATTRIBUTE, PRESENTATION_VIEW_NEWS);
@@ -78,7 +83,7 @@ public class NewsController {
 	}
 
 	@RequestMapping("admin/editNews")
-	public String editNewsPage(@ModelAttribute("newsId") int newsId, Model model) {
+	public String editNewsPage(@ModelAttribute("newsId") int newsId, Model model, RedirectAttributes redirectAttr) {
 		News news = newsService.findById(newsId);
 		model.addAttribute(PAGE_PRESENTATION_ATTRIBUTE, PRESENTATION_EDIT_NEWS);
 		model.addAttribute(USER_DATA_ATTRIBUTE, new UserData());
@@ -88,18 +93,17 @@ public class NewsController {
 
 	@RequestMapping("admin/saveNews")
 	public String saveNews(@ModelAttribute("newsData") News newsData, @ModelAttribute("user") UserInfo userInfo,
-			Model model) {
-//		System.out.println("saveNews -> title = " + newsData.getTitle()); //FLAG
+			Model model, RedirectAttributes redirectAttr) {
 		newsData.setUserInfo(userInfo);
 		newsService.saveOrUpdate(newsData);
 		return "redirect:/admin/main";
 	}
 
 	@RequestMapping("admin/deleteNews")
-	public String deleteNews(@ModelAttribute("news") News news, Model model) {
+	public String deleteNews(@ModelAttribute("news") News news, Model model, RedirectAttributes redirectAttr) {
 		if (news.getMarkedNewsId() != null) {
 			newsService.delete(news.getMarkedNewsId());
-		} 
+		}
 		return "redirect:/admin/main";
 	}
 

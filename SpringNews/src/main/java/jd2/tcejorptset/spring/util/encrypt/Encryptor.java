@@ -2,7 +2,7 @@ package jd2.tcejorptset.spring.util.encrypt;
 
 public interface Encryptor {
 	
-	String encrypt (String to_encrypt);
+	String encrypt (String toEncrypt);
 	boolean similarity (String regular, String encrypted);
 	
 

@@ -49,6 +49,7 @@ input#publish {
 <%-- <c:if test="${presentation eq 'addNews'}"> --%>
 <!-- <input type="hidden" name="command" value="do_add_news" /> -->
 <%-- </c:if> --%>
+<form:hidden path="id" />
 <p> 
 <label for="title">Title</label>
 <form:textarea path="title" class="text_edit" id="title" placeholder="Enteer Your title here" />

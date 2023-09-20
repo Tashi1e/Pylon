@@ -7,7 +7,7 @@ import jd2.tcejorptset.spring.bean.News;
 public interface NewsService {
 	
   void saveOrUpdate(News news);
-  void delete(int [] newsId);
+  void delete(Integer [] newsId);
   
   List<News> latestList(int count);
   List<News> latestList();
