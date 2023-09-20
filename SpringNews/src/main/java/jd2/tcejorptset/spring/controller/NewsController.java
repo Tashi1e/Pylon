@@ -41,14 +41,11 @@ public class NewsController {
 	public UserInfo gtUserInfo() {
 		return new UserInfo();
 	}
-
-//	@ModelAttribute("locale")
-//	public String gtLocale() {
-//		return "";
-//	}
-
+	
 	@RequestMapping("*/main")
-	public String mainPage(Model model) {
+	public String mainPage(@ModelAttribute("errorCode") String errorCode, 
+			@ModelAttribute("locale") String locale,
+			Model model) {
 		List<News> newsList = newsService.latestList();
 		model.addAttribute(NEWS_LIST_ATTRIBUTE, newsList);
 		model.addAttribute(PAGE_PRESENTATION_ATTRIBUTE, PRESENTATION_NEWS_LIST);
