@@ -66,6 +66,6 @@ public class News implements Serializable {
 	private String author;
 	
 	@Transient
-	private int [] markedNewsId;
+	private Integer [] markedNewsId;
 
 }

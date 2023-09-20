@@ -11,11 +11,12 @@ import org.springframework.stereotype.Service;
 
 import jd2.tcejorptset.spring.bean.AuthorizedUserData;
 import jd2.tcejorptset.spring.bean.User;
-import jd2.tcejorptset.spring.bean.UserData;
 import jd2.tcejorptset.spring.bean.UserInfo;
 import jd2.tcejorptset.spring.bean.UserRole;
 import jd2.tcejorptset.spring.bean.UserToken;
 import jd2.tcejorptset.spring.dao.UserDAO;
+import jd2.tcejorptset.spring.global.constants.ErrorCode;
+import jd2.tcejorptset.spring.global.constants.UsersRole;
 import jd2.tcejorptset.spring.util.encrypt.Encryptor;
 
 @Service
@@ -25,7 +26,7 @@ public class UserServiceImpl implements UserService {
 	UserDAO userDAO;
 
 	@Autowired
-	@Qualifier("BCrypt") 
+	@Qualifier("BCrypt")
 	Encryptor bcryptor;
 
 	@Autowired
@@ -35,55 +36,46 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public AuthorizedUserData signIn(String login, String password) {
-
 		User user = userDAO.getUser(login);
-		AuthorizedUserData userData = new AuthorizedUserData();
-		userData.setUserRole("guest");
-		if (user != null && bcryptor.similarity(password, user.getPassword())) {
-			userData.setUserRole(user.getUserRole().getRole());
-			userData.setUserInfo(user.getUserInfo()); ;
-//			System.out.println("Service -> signIn -> role = " + user.getUserRole().getRole()); // FLAG
+		if (user == null) {
+			throw new RuntimeException(ErrorCode.WRONG_LOGIN.getCode());
 		}
+		if (!bcryptor.similarity(password, user.getPassword())) {
+			throw new RuntimeException(ErrorCode.WRONG_PASSWORD.getCode());
+		}
+		AuthorizedUserData userData = new AuthorizedUserData();
+		userData.setUserRole(UsersRole.GUEST.getRole());
+		userData.setUserRole(user.getUserRole().getRole());
+		userData.setUserInfo(user.getUserInfo());
 		return userData;
 	}
 
 	@Override
 	@Transactional
 	public AuthorizedUserData tokenSignIn(String selector, String validator) {
-//		System.out.println("tokenSignIn -> selector + validator = " + selector + " + " + validator); //FLAG
 		UserToken innerToken = userDAO.getUserToken(selector, validator);
-//		if (innerToken != null) { //FLAG
-//		System.out.println("tokenSignIn -> innerToken -> selector + validator = " + innerToken.getSelector() + " + " + innerToken.getValidator()); //FLAG
-//		} //FLAG
 		AuthorizedUserData userData = new AuthorizedUserData();
-		userData.setUserRole("guest");
-		
+		userData.setUserRole(UsersRole.GUEST.getRole());
 		if (innerToken != null) {
-			System.out.println("tokenSignIn -> role = " + innerToken.getUser().getUserRole().getRole());// FLAG
 			userData.setUserRole(innerToken.getUser().getUserRole().getRole());
-			userData.setUserInfo(innerToken.getUser().getUserInfo()); ;
+			userData.setUserInfo(innerToken.getUser().getUserInfo());
 		}
 		return userData;
 	}
 
 	@Override
 	@Transactional
-	public boolean registration(User user, UserInfo userInfo) {
-//		try {
-//			if (userDAO.getUser(user.getLogin()) != null) {
-//				throw new ServiceException("Login Exists");
-//			}
-//			if (userDAO.emailExists(user.getLogin())) {
-//				throw new ServiceException("Email Exists");
-//			}
+	public void registration(User user, UserInfo userInfo) {
+		if (userDAO.getUser(user.getLogin()) != null) {
+			throw new RuntimeException(ErrorCode.LOGIN_EXISTS.getCode());
+		}
+		if (userDAO.emailExists(user.getLogin())) {
+			throw new RuntimeException(ErrorCode.EMAIL_EXISTS.getCode());
+		}
 		userInfo.setUserRegDate(new Timestamp(System.currentTimeMillis()));
 		user.setPassword(bcryptor.encrypt(user.getPassword()));
-		user.setUserRole(new UserRole("user"));
+		user.setUserRole(new UserRole(UsersRole.USER.getRole()));
 		user.setUserInfo(userInfo);
-		return userDAO.saveUser(user);
-//		} catch (Exception e) {
-//			throw new ServiceException(e);
-//		}
 	}
 
 	@Override
@@ -93,7 +85,7 @@ public class UserServiceImpl implements UserService {
 		String selector = scryptor.encrypt(RandomStringUtils.randomAlphabetic(16));
 		String validator = scryptor.encrypt(RandomStringUtils.randomAlphabetic(16));
 		UserToken userToken = user.getUserToken();
-		if (userToken==null) {
+		if (userToken == null) {
 			userToken = new UserToken();
 		}
 		userToken.setSelector(selector);
